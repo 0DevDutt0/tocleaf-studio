@@ -144,7 +144,7 @@ The upstream `stair eval` gives the same top-1 as our unconstrained greedy path,
 ## 8. Remaining tasks
 
 1. **Commit and push** the working-tree changes in section 3, if you want them on the branch.
-2. **Second document.** Phase 1 needs the same chain on one real, legally usable textbook with a nested ToC (candidates in `SOURCING_AND_DATA_AUDIT.md`). Without it, Phase 1 is not complete.
+2. **Second document (blocked).** Phase 1 needs the same chain on one real, legally usable textbook with a nested ToC. The recommended book is the CC BY 4.0 Nursing Assistant textbook (WisTech Open, `wtcs.pressbooks.pub/nurseassist`). On 10 Nov 2026 the site returned an error page to an automated request. A second request with a changed user agent was denied by the auto-mode classifier as bot-check circumvention, and it was not retried. No PDF was retrieved. Options for the user: supply the PDF, or choose another CC BY textbook with an openly downloadable PDF that has a native outline. The pipeline stops on a PDF without an outline, because heading inference is not built.
 3. **Paper-faithful checkpoint selection.** Recall@1 on the dev split with patience 20 is not wired into training (ADR-011).
 4. **Larger evaluation.** More author-written queries, and a larger training set, before comparing methods.
 5. **Upstream evaluation of the constraint.** Upstream's `hallucination_rate` counts parent nodes as valid. Our audit counts them as non-leaf. Report both, as separate definitions.

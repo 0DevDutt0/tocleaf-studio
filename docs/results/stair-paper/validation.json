@@ -1,0 +1,24 @@
+{
+  "source": "<wsl-home>/stair-work/corpora/stair-paper-2609.03874.pdf",
+  "source_sha256": "42dcd80ff2320446da6e55b6660c8655e1b8e33ec44e977ec045d86f398971db",
+  "pages": 11,
+  "nodes": 16,
+  "leaves": 12,
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    {
+      "code": "RUNNING_TEXT_REMOVED",
+      "severity": "warning",
+      "message": "Removed repeated running text (none) and 3 bare page-number line(s) before locating headings.",
+      "node_id": null
+    },
+    {
+      "code": "UNMAPPED_FRONT_MATTER",
+      "severity": "warning",
+      "message": "270 words appear before the first outline heading and belong to no section.",
+      "node_id": null
+    }
+  ],
+  "generated_at": "2026-11-10T12:14:10.681589+00:00"
+}

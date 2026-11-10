@@ -167,6 +167,7 @@ def build_dataset(
             "book_title": structure.book_title,
         },
         "structure": {
+            "corrections": structure.corrections,
             "nodes": len(structure.nodes),
             "leaves": len(structure.leaves),
             "errors": len(structure.errors),

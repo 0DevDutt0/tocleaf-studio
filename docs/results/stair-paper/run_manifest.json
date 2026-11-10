@@ -1,0 +1,53 @@
+{
+  "run_id": "stair-paper-r1",
+  "created_at": "2026-11-10T12:22:34.480782+00:00",
+  "upstream": {
+    "repository": "https://github.com/meghanadhpulivarthi/stair-clean.git",
+    "commit": "3729c54f54e6e28aa3a4d714fc7ff8a3af72c0f3",
+    "checkout": "<wsl-home>/stair-work/upstream/stair-clean"
+  },
+  "command": [
+    "<wsl-home>/.local/bin/uv",
+    "run",
+    "--project",
+    "<wsl-home>/stair-work/upstream/stair-clean",
+    "stair",
+    "train",
+    "--data",
+    "<wsl-home>/stair-work/workspace/stair-paper/dataset",
+    "--out",
+    "<wsl-home>/stair-work/runs/stair-paper-r1",
+    "--config",
+    "<wsl-home>/stair-work/runs/stair-paper-r1/override.yaml"
+  ],
+  "returncode": 0,
+  "duration_seconds": 428.7,
+  "peak_gpu_memory_mib": 14241,
+  "gpu_total_mib": null,
+  "overrides": {
+    "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.1,
+    "learning_rate": 0.0001,
+    "num_train_epochs": 20,
+    "batch_size_per_gpu": 4,
+    "gradient_accumulation_steps": 2,
+    "max_seq_length": 2048,
+    "eval_interval": 50,
+    "save_interval": 50,
+    "early_stopping_patience": 6,
+    "warmup_steps": 20
+  },
+  "dataset_fingerprint": "1d8121f6ac679f0d0f18bbaf15bb30d77f8f05455a714b4934c7bfed1c2d2f6d",
+  "prompt_contract_sha256": "5124b33d62dab3e8d99026ba2d2c0c4a2fa2780b0103722cf7e1daaa9901ce53",
+  "checkpoints": [
+    "checkpoint-100",
+    "checkpoint-50",
+    "checkpoint-best"
+  ],
+  "checkpoint_best_present": true,
+  "adapter_saved": true,
+  "boundary_mismatch_warnings": 39,
+  "success": true
+}

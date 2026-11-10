@@ -31,6 +31,7 @@ def write_validation_report(structure: StructureResult, path: Path) -> dict:
         "passed": structure.passed,
         "errors": [issue.to_dict() for issue in structure.errors],
         "warnings": [issue.to_dict() for issue in structure.issues if issue.severity == "warning"],
+        "corrections": structure.corrections,
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
     }
     path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -47,11 +48,14 @@ def build_dataset_from_pdf(
     min_words_in_section: int = 5,
     split: SplitConfig = SplitConfig(),
     book_title: str | None = None,
+    corrections=None,
 ) -> dict:
     work = Path(workspace)
     work.mkdir(parents=True, exist_ok=True)
 
-    structure = analyze_pdf(pdf_path, min_words_in_section=min_words_in_section, book_title=book_title)
+    structure = analyze_pdf(
+        pdf_path, min_words_in_section=min_words_in_section, book_title=book_title, corrections=corrections
+    )
     report = write_validation_report(structure, work / "validation.json")
     if not structure.passed:
         raise StructureValidationError(

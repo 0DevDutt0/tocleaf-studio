@@ -1,0 +1,115 @@
+{
+  "description": "Corrections for OpenStax 'Introduction to Intellectual Property' (CC BY 4.0), PDF of 201 pages. Titles and pages are as printed by `tocleaf analyze`; pages are 1-based. Each rule removes one outline entry and everything nested under it. Rules are curation choices, not repairs: delete a rule to restore the entry.",
+  "exclude": [
+    {
+      "title": "Contents",
+      "page": 7,
+      "reason": "Front matter: the printed table of contents. Its text repeats the ToC rather than describing the book's subject matter."
+    },
+    {
+      "title": "Preface and Foreword",
+      "page": 9,
+      "reason": "Front matter about the publisher and the book's origin, not its subject matter. Also removes its nested entry 'About OpenStax'."
+    },
+    {
+      "title": "Chapter Outline",
+      "page": 17,
+      "reason": "Chapter 1 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text."
+    },
+    {
+      "title": "Introduction",
+      "page": 18,
+      "reason": "Chapter 1 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers."
+    },
+    {
+      "title": "Chapter Outline",
+      "page": 65,
+      "reason": "Chapter 2 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text."
+    },
+    {
+      "title": "Introduction",
+      "page": 66,
+      "reason": "Chapter 2 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers."
+    },
+    {
+      "title": "Chapter Outline",
+      "page": 101,
+      "reason": "Chapter 3 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text."
+    },
+    {
+      "title": "Introduction",
+      "page": 102,
+      "reason": "Chapter 3 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers."
+    },
+    {
+      "title": "Chapter Outline",
+      "page": 141,
+      "reason": "Chapter 4 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text."
+    },
+    {
+      "title": "Introduction",
+      "page": 141,
+      "reason": "Chapter 4 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers."
+    },
+    {
+      "title": "Chapter Outline",
+      "page": 171,
+      "reason": "Chapter 5 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text."
+    },
+    {
+      "title": "Introduction",
+      "page": 172,
+      "reason": "Chapter 5 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers."
+    },
+    {
+      "title": "Assessment Questions",
+      "page": 60,
+      "reason": "Chapter 1 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets."
+    },
+    {
+      "title": "Assessment Questions",
+      "page": 97,
+      "reason": "Chapter 2 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets."
+    },
+    {
+      "title": "Assessment Questions",
+      "page": 135,
+      "reason": "Chapter 3 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets."
+    },
+    {
+      "title": "Assessment Questions",
+      "page": 165,
+      "reason": "Chapter 4 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets."
+    },
+    {
+      "title": "Assessment Questions",
+      "page": 188,
+      "reason": "Chapter 5 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets."
+    },
+    {
+      "title": "Appendix A Glossary",
+      "page": 191,
+      "reason": "Back matter: glossary entries, organised by chapter. Excluded with its nested chapter entries so that retrieval targets are the chapter sections."
+    },
+    {
+      "title": "Answer Key",
+      "page": 195,
+      "reason": "Back matter: answers to the assessment questions. Excluded with its nested chapter entries."
+    },
+    {
+      "title": "Index",
+      "page": 201,
+      "reason": "Back matter: index of terms. Not explanatory content."
+    }
+  ],
+  "remove_lines": [
+    {
+      "pattern": "^\\d+ \\d+ • .+$",
+      "reason": "Even-page running head: page number, chapter number, bullet and chapter title. Not section content."
+    },
+    {
+      "pattern": "^\\d+(\\.\\d+)? • .+ \\d+$",
+      "reason": "Odd-page running head: section number, bullet, section title and page number. Not section content."
+    }
+  ]
+}

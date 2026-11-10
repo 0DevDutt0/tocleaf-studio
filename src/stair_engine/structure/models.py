@@ -81,6 +81,8 @@ class StructureResult:
     issues: list[ValidationIssue]
     unmapped_front_matter_words: int = 0
     book_title: str = ""
+    # Explicit corrections applied before validation (see structure/overrides.py).
+    corrections: list[dict] = field(default_factory=list)
 
     @property
     def errors(self) -> list[ValidationIssue]:

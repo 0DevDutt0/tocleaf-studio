@@ -113,7 +113,7 @@ def remove_running_text(
 ) -> tuple[list[str], RunningTextReport]:
     """Remove running headers, running footers and bare page numbers.
 
-    A line counts as running text when it is short and appears on at least half of the pages
+    A line counts as running text when it is short and appears on at least a quarter of the pages
     (and at least three of them). Bare page numbers are removed on any page. Everything removed is
     reported, so the caller can show it. Nothing is removed silently.
     """
@@ -124,7 +124,9 @@ def remove_running_text(
         page_line_sets.append({line.lower() for line in lines})
 
     protected = {" ".join(title.split()).lower() for title in protected_titles}
-    threshold = max(3, (len(page_texts) + 1) // 2)
+    # A running line appears on at least a quarter of the pages. Body boilerplate such as a repeated
+    # 'Learning Objectives' label appears on far fewer pages, so it is kept.
+    threshold = max(3, -(-len(page_texts) // 4))
     counts: dict[str, int] = {}
     for line_set in page_line_sets:
         for line in line_set:

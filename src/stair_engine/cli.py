@@ -33,7 +33,10 @@ def _print_structure_summary(structure) -> None:
 def cmd_analyze(args) -> int:
     from stair_engine.pipeline import write_validation_report
 
-    structure = analyze_pdf(args.pdf, min_words_in_section=args.min_words, book_title=args.title)
+    from stair_engine.structure.overrides import load_corrections
+
+    corrections = load_corrections(args.corrections) if args.corrections else None
+    structure = analyze_pdf(args.pdf, min_words_in_section=args.min_words, book_title=args.title, corrections=corrections)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     write_validation_report(structure, out / "validation.json")
@@ -56,6 +59,9 @@ def cmd_build_dataset(args) -> int:
     except LLMConfigurationError as error:
         print(f"tocleaf build-dataset: {error}", file=sys.stderr)
         return 1
+    from stair_engine.structure.overrides import load_corrections
+
+    corrections = load_corrections(args.corrections) if args.corrections else None
     try:
         manifest = build_dataset_from_pdf(
             args.pdf,
@@ -66,6 +72,7 @@ def cmd_build_dataset(args) -> int:
             min_words_in_section=args.min_words,
             split=SplitConfig(train=args.train, val=args.val, test=args.test, seed=args.seed),
             book_title=args.title,
+            corrections=corrections,
         )
     except StructureValidationError as error:
         print(f"tocleaf build-dataset: {error}", file=sys.stderr)
@@ -176,12 +183,14 @@ def build_parser() -> argparse.ArgumentParser:
     analyze.add_argument("--out", required=True)
     analyze.add_argument("--title", default=None)
     analyze.add_argument("--min-words", type=int, default=5)
+    analyze.add_argument("--corrections", default=None, help="JSON file of explicit, reasoned exclusions (see corpora/)")
     analyze.set_defaults(func=cmd_analyze)
 
     build = sub.add_parser("build-dataset", help="Analyze, generate synthetic queries and write the dataset")
     build.add_argument("pdf")
     build.add_argument("--workspace", required=True)
     build.add_argument("--title", default=None)
+    build.add_argument("--corrections", default=None, help="JSON file of explicit, reasoned exclusions")
     build.add_argument("--questions-per-passage", type=int, default=4)
     build.add_argument("--max-passage-words", type=int, default=900)
     build.add_argument("--min-words", type=int, default=5)

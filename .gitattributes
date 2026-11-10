@@ -1,0 +1,7 @@
+# Binary files must never be converted by line-ending settings (autocrlf on Windows would corrupt them).
+*.pdf binary
+*.safetensors binary
+*.bin binary
+
+# Shell scripts run in WSL; they must keep LF endings on every platform.
+*.sh text eol=lf

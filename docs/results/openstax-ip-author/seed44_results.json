@@ -1,0 +1,43 @@
+{
+  "rows": {
+    "seed44_author_rule_pick": {
+      "constrained_beam_R@1": 0.6241,
+      "constrained_beam_R@3": 0.7872,
+      "constrained_exact_R@1": 0.617,
+      "greedy_R@1": 0.6099,
+      "invalid_rate": 0.0,
+      "non_leaf_rate": 0.0,
+      "beams_checked": 6627,
+      "queries": 141
+    },
+    "seed44_author_dev_loss_pick": {
+      "constrained_beam_R@1": 0.6241,
+      "constrained_beam_R@3": 0.7872,
+      "constrained_exact_R@1": 0.617,
+      "greedy_R@1": 0.6099,
+      "invalid_rate": 0.0,
+      "non_leaf_rate": 0.0,
+      "beams_checked": 6627,
+      "queries": 141
+    },
+    "seed44_synthetic_test": {
+      "constrained_beam_R@1": 0.6809,
+      "constrained_beam_R@3": 0.8511,
+      "constrained_exact_R@1": 0.7021,
+      "greedy_R@1": 0.7021,
+      "invalid_rate": 0.0,
+      "non_leaf_rate": 0.0,
+      "beams_checked": 2209,
+      "queries": 47
+    }
+  },
+  "paired_vs_bm25": {
+    "comparison": "BM25 vs seed 44 (rule pick), per-seed replicate of the primary test",
+    "top1_BM25": 0.7801,
+    "top1_seed44": 0.6241,
+    "BM25_right_seed44_wrong": 34,
+    "seed44_right_BM25_wrong": 12,
+    "net": 22,
+    "p_two_sided_exact": 0.0016414913408482334
+  }
+}

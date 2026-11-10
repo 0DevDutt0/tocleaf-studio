@@ -14,14 +14,14 @@ The main test is a 201-page open textbook with 47 sections: OpenStax, *Introduct
 | STAIR, checkpoint chosen by dev Recall@1 | 0.667 | 0.844 |
 | STAIR, checkpoint chosen by dev loss | 0.447 | 0.773 |
 
-On this test the keyword baseline is still ahead. On seed 42 the gap is 11 points (paired exact test p = 0.023). On seed 43 it is 10 points (p = 0.076, not significant). An earlier test built from generated questions showed a bigger gap (0.936 against 0.660). Those questions reuse the wording of their passages, which suits keyword matching, so a separate test was written to check it.
+On this test the keyword baseline is still ahead on all three seeds. On seed 42 the gap is 11 points (paired exact test p = 0.023). On seed 43 it is 10 points (p = 0.076, not significant). On seed 44 it is 16 points (p = 0.0016). An earlier test built from generated questions showed a bigger gap (0.936 against 0.660). Those questions reuse the wording of their passages, which suits keyword matching, so a separate test was written to check it.
 
 What the runs show:
 
 - Constrained decoding does what it should. In every STAIR evaluation, every output was a valid leaf section: 0 invalid and 0 non-leaf identifiers across all constrained beams.
-- The checkpoint rule matters, on seed 42. Choosing by dev Recall@1 beats choosing by dev loss by 22 points (p < 0.001). On seed 43 both rules picked the same epoch, so that comparison does not exist for it.
+- The checkpoint rule matters, on seed 42. Choosing by dev Recall@1 beats choosing by dev loss by 22 points (p < 0.001). On seeds 43 and 44 both rules picked the same epoch, so that comparison does not exist for them.
 - Augmented training data gave a gain on the generated test (+17 points, p = 0.096, not significant at 0.05). It gave no gain on the separate test (0.482 against 0.468, p = 0.89).
-- Two training seeds agree closely on the separate test: 0.667 (seed 42) and 0.681 (seed 43). The synthetic test gives 0.660 and 0.617. A third seed stopped about three minutes into training and has not been rerun. Seed details are in `docs/results/openstax-ip-author/`.
+- Three training seeds give 0.667 (seed 42), 0.681 (seed 43) and 0.624 (seed 44) on the separate test, a mean of 0.657. The synthetic test gives 0.660, 0.617 and 0.681. The first attempt at seed 44 stopped early and was rerun in full. Seed details are in `docs/results/openstax-ip-author/`.
 
 ## How it works
 
@@ -75,7 +75,7 @@ Not built yet: dense embeddings, hybrid retrieval, reranking, answers with citat
 ## Limitations
 
 - The main test is one textbook. Its queries were written by an AI coding agent, not an independent annotator, and the writer read only the opening text of each section.
-- Results come from two training seeds. A third seed stopped during training and has not been rerun.
+- Results come from three training seeds. The first attempt at seed 44 stopped early and was rerun in full; its cause is not confirmed.
 - The model is small (0.5B parameters). Keyword matching is hard to beat when a question reuses the section's own wording. The paraphrased and contextual questions show where the model still loses.
 - The training path runs an upstream research repository that has no licence. See the licence section.
 - A PDF without a native outline is refused. The pipeline does not infer structure from headings.

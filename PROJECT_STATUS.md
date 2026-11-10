@@ -1,6 +1,6 @@
 # Project status
 
-Last updated: 11 Nov 2026 (Phase 1; author-written set evaluated; seed 43 done; seed 44 stopped and not rerun).
+Last updated: 11 Nov 2026 (Phase 1; author-written set evaluated for seeds 42, 43 and 44).
 
 ## 1. Where things stand
 
@@ -146,7 +146,7 @@ The upstream `stair eval` gives the same top-1 as our unconstrained greedy path,
 1. **Commit and push** the working-tree changes in section 3, if you want them on the branch.
 2. **Second document (blocked).** Phase 1 needs the same chain on one real, legally usable textbook with a nested ToC. The recommended book is the CC BY 4.0 Nursing Assistant textbook (WisTech Open, `wtcs.pressbooks.pub/nurseassist`). On 10 Nov 2026 the site returned an error page to an automated request. A second request with a changed user agent was denied by the auto-mode classifier as bot-check circumvention, and it was not retried. No PDF was retrieved. Options for the user: supply the PDF, or choose another CC BY textbook with an openly downloadable PDF that has a native outline. The pipeline stops on a PDF without an outline, because heading inference is not built.
 3. **Paper-faithful checkpoint selection.** Recall@1 on the dev split with patience 20 is not wired into training (ADR-011).
-4. **Larger evaluation.** The 141-query author-written set is evaluated (section 8b). Seed 43 is done. Seed 44 is not finished.
+4. **Larger evaluation.** The 141-query author-written set is evaluated for three training seeds (section 8b).
 5. **Upstream evaluation of the constraint.** Upstream's `hallucination_rate` counts parent nodes as valid. Our audit counts them as non-leaf. Report both, as separate definitions.
 6. **Licence and name: decided on 10 Nov 2026** (MIT; "Tocleaf"). See ADR-009 and the README. The upstream training code still has no licence, which the README states.
 
@@ -254,14 +254,14 @@ synthetic question. Protocol, tables and limits: `docs/results/openstax-ip-autho
   p = 0.096) does not carry over to these queries.
 - Constraint audit: 0 invalid and 0 non-leaf identifiers in all four STAIR runs (6,627 beams each).
 - The lead of BM25 is about 11 points here, against about 28 on the synthetic split, and BM25 is still ahead.
-- Seed 43 done: author set 0.681 (rule pick), synthetic test 0.617, per-seed paired p vs BM25 0.076
-  (`docs/results/openstax-ip-author/seed43_results.json`). Seed 44 stopped about three minutes into training and was not
-  rerun (see section 9).
+- Seeds 43 and 44 done: author-set rule picks 0.681 (seed 43) and 0.624 (seed 44), synthetic tests 0.617 and 0.681, per-seed paired p vs BM25 0.076 (seed 43, not significant) and 0.0016 (seed 44)
+  (`docs/results/openstax-ip-author/seed43_results.json` and `seed44_results.json`). The first seed 44 attempt stopped early and was
+  rerun in full (see section 9).
 
 ## 9. Next milestone
 
-The author-written set is evaluated (section 8b). Seed 43 is done: it scores 0.681 on the author set against 0.667 for seed 42,
-and BM25 leads it by 10 points (per-seed p = 0.076, not significant). Seed 44 stopped about three minutes into training on
-10 Nov 2026, when the harness stopped the background launchers under low host memory. It has not been rerun, and a rerun
-needs the user's go-ahead. Phase 2 comparisons and any generalisation claim wait for the seed results. The current evidence
+The author-written set is evaluated for seeds 42, 43 and 44 (section 8b). The rule picks score 0.667, 0.681 and 0.624 (mean 0.657), and BM25 (0.780) leads on all three seeds.
+The per-seed p-values are 0.023, 0.076 and 0.0016, so the seed 44 gap is significant on its own. The first seed 44 attempt stopped early on
+10 Nov 2026. Its cause is not confirmed. The rerun used the same configuration and seed, and its result is the one reported here.
+Phase 2 comparisons and any generalisation claim wait for the seed results. The current evidence
 does not show STAIR ahead of BM25 on independently written queries.

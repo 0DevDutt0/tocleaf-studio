@@ -1,0 +1,94 @@
+{
+  "mode": "constrained",
+  "queries": 141,
+  "comparisons": [
+    {
+      "comparison": "primary: BM25 vs headline (rule pick)",
+      "A": "bm25",
+      "B": "headline_rule_pick",
+      "top1_A": 0.7801,
+      "top1_B": 0.6667,
+      "A_right_B_wrong": 30,
+      "A_wrong_B_right": 14,
+      "net": 16,
+      "p_two_sided_exact": 0.022628841205914796
+    },
+    {
+      "comparison": "headline vs dev-loss control",
+      "A": "headline_rule_pick",
+      "B": "control_dev_loss_pick",
+      "top1_A": 0.6667,
+      "top1_B": 0.4468,
+      "A_right_B_wrong": 38,
+      "A_wrong_B_right": 7,
+      "net": 31,
+      "p_two_sided_exact": 3.1213096463034162e-06
+    },
+    {
+      "comparison": "headline vs upstream trainer, augmented",
+      "A": "headline_rule_pick",
+      "B": "upstream_trainer_augmented",
+      "top1_A": 0.6667,
+      "top1_B": 0.4823,
+      "A_right_B_wrong": 30,
+      "A_wrong_B_right": 4,
+      "net": 26,
+      "p_two_sided_exact": 6.16488978266716e-06
+    },
+    {
+      "comparison": "headline vs earlier run (200 queries)",
+      "A": "headline_rule_pick",
+      "B": "earlier_run_200_queries",
+      "top1_A": 0.6667,
+      "top1_B": 0.4681,
+      "A_right_B_wrong": 39,
+      "A_wrong_B_right": 11,
+      "net": 28,
+      "p_two_sided_exact": 9.021490107130603e-05
+    },
+    {
+      "comparison": "upstream augmented vs earlier run (data only)",
+      "A": "upstream_trainer_augmented",
+      "B": "earlier_run_200_queries",
+      "top1_A": 0.4823,
+      "top1_B": 0.4681,
+      "A_right_B_wrong": 28,
+      "A_wrong_B_right": 26,
+      "net": 2,
+      "p_two_sided_exact": 0.8919231511047494
+    },
+    {
+      "comparison": "BM25 vs upstream augmented",
+      "A": "bm25",
+      "B": "upstream_trainer_augmented",
+      "top1_A": 0.7801,
+      "top1_B": 0.4823,
+      "A_right_B_wrong": 53,
+      "A_wrong_B_right": 11,
+      "net": 42,
+      "p_two_sided_exact": 1.0058579844832594e-07
+    },
+    {
+      "comparison": "BM25 vs earlier run",
+      "A": "bm25",
+      "B": "earlier_run_200_queries",
+      "top1_A": 0.7801,
+      "top1_B": 0.4681,
+      "A_right_B_wrong": 58,
+      "A_wrong_B_right": 14,
+      "net": 44,
+      "p_two_sided_exact": 1.6464300115968573e-07
+    },
+    {
+      "comparison": "BM25 vs dev-loss control",
+      "A": "bm25",
+      "B": "control_dev_loss_pick",
+      "top1_A": 0.7801,
+      "top1_B": 0.4468,
+      "A_right_B_wrong": 56,
+      "A_wrong_B_right": 9,
+      "net": 47,
+      "p_two_sided_exact": 2.0492453022035242e-09
+    }
+  ]
+}

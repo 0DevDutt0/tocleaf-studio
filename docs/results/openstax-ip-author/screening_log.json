@@ -1,0 +1,65 @@
+[
+  {
+    "query_id": "au004",
+    "type": "direct",
+    "gold_section": "1.2",
+    "original": "What did the Venetian Statute of 1474 say about inventors and their new devices?",
+    "replacement": "What protection did the Venetian Statute of 1474 give to inventors, and for how long?",
+    "reason": "leakage screen: content-token Jaccard 0.636 with a train synthetic question",
+    "synthetic_neighbour": "What did the Venetian Statute of 1474 decree regarding inventors of new and useful devices?"
+  },
+  {
+    "query_id": "au040",
+    "type": "direct",
+    "gold_section": "2.5",
+    "original": "What are initial disclosures in patent litigation?",
+    "replacement": "What must the early disclosures in a patent case cover, such as each side's positions and the witnesses and documents involved?",
+    "reason": "leakage screen: content-token Jaccard 0.800 with a train synthetic question",
+    "synthetic_neighbour": "What is the purpose of initial disclosures in patent litigation?"
+  },
+  {
+    "query_id": "au091",
+    "type": "direct",
+    "gold_section": "4.1",
+    "original": "What is a trademark, and what was its original purpose?",
+    "replacement": "What did trademarks originally exist to show, and how did they protect the producers who used them?",
+    "reason": "leakage screen: content-token Jaccard 0.600 with a train synthetic question",
+    "synthetic_neighbour": "What is the primary purpose of a trademark in its original form?"
+  },
+  {
+    "query_id": "au094",
+    "type": "direct",
+    "gold_section": "4.2",
+    "original": "Who is credited with creating the world's first trademarks?",
+    "replacement": "Which craftspeople of the Early Bronze Age are said to have invented trademarks by stamping their works?",
+    "reason": "leakage screen: content-token Jaccard 0.750 with a train synthetic question",
+    "synthetic_neighbour": "Who are credited by scholars of antiquity with creating the world's first trademarks?"
+  },
+  {
+    "query_id": "au127",
+    "type": "direct",
+    "gold_section": "5.2",
+    "original": "When was the federal Defend Trade Secrets Act signed into law?",
+    "replacement": "In what year did Congress create a federal cause of action for trade secret misappropriation?",
+    "reason": "leakage screen: content-token Jaccard 1.000 with a train synthetic question",
+    "synthetic_neighbour": "When was the federal Defend Trade Secrets Act signed into law?"
+  },
+  {
+    "query_id": "au130",
+    "type": "direct",
+    "gold_section": "5.3",
+    "original": "What two essential criteria must information meet to qualify as a trade secret?",
+    "replacement": "Which two requirements must a piece of information satisfy before the law treats it as a trade secret?",
+    "reason": "leakage screen: content-token Jaccard 1.000 with a train synthetic question",
+    "synthetic_neighbour": "What are the two essential criteria that information must meet to qualify as a trade secret?"
+  },
+  {
+    "query_id": "au133",
+    "type": "direct",
+    "gold_section": "5.4",
+    "original": "What does the second element of trade secret protection require?",
+    "replacement": "What does the secrecy requirement for a trade secret demand from its owner?",
+    "reason": "leakage screen: content-token Jaccard 0.625 with a train synthetic question",
+    "synthetic_neighbour": "What is the second element necessary to gain trade secret protection?"
+  }
+]

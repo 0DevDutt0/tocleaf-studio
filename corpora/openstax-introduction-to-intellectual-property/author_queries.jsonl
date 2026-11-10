@@ -1,0 +1,147 @@
+{"query_id": "au001", "question": "What is a patent, and what does the inventor give the public in exchange for it?", "gold_section": "1.1", "type": "direct"}
+{"query_id": "au002", "question": "A government lets an inventor keep others from making a new device for a limited period. What does the inventor owe society for that privilege?", "gold_section": "1.1", "type": "paraphrase"}
+{"query_id": "au003", "question": "An inventor holds a U.S. grant on a new device and wants a German company stopped from selling a copy in Germany. Will the U.S. grant help?", "gold_section": "1.1", "type": "contextual"}
+{"query_id": "au004", "question": "What protection did the Venetian Statute of 1474 give to inventors, and for how long?", "gold_section": "1.2", "type": "direct"}
+{"query_id": "au005", "question": "Before modern times, why did some European rulers hand out exclusive trading rights, and how did that work against rewarding inventors?", "gold_section": "1.2", "type": "paraphrase"}
+{"query_id": "au006", "question": "A historian notes that early European monarchs used invention grants for more than rewarding inventors. What other use is described?", "gold_section": "1.2", "type": "contextual"}
+{"query_id": "au007", "question": "Why did the Founding Fathers treat patents and related rights as matters of the highest national importance?", "gold_section": "1.3", "type": "direct"}
+{"query_id": "au008", "question": "Why did the leaders of the new nation want a system that rewarded inventors, when the country was still a farming economy that depended on imports?", "gold_section": "1.3", "type": "paraphrase"}
+{"query_id": "au009", "question": "A student writes that intellectual capital now makes up a large share of the economy. What share of total U.S. GDP does the chapter give for it?", "gold_section": "1.3", "type": "contextual"}
+{"query_id": "au010", "question": "How did U.S. courts treat patent rights compared with courts in Britain and other European countries?", "gold_section": "1.4", "type": "direct"}
+{"query_id": "au011", "question": "Why did predictable, uniform court enforcement matter to investors who wanted to fund turning new inventions into products?", "gold_section": "1.4", "type": "paraphrase"}
+{"query_id": "au012", "question": "A law student asks which early American case said the court must stop wrongdoers from reaping the fruits of other people's labor and genius. Which case and which justice are linked to it?", "gold_section": "1.4", "type": "contextual"}
+{"query_id": "au013", "question": "What did Thomas Jefferson say about the effect of America's first invention law?", "gold_section": "1.5", "type": "direct"}
+{"query_id": "au014", "question": "How soon after the first American law of this kind did the United States overtake Britain in the number of new inventions?", "gold_section": "1.5", "type": "paraphrase"}
+{"query_id": "au015", "question": "An economics class asks whether the early growth of American invention can be linked to the nation's first invention law. What evidence does the chapter give for a link?", "gold_section": "1.5", "type": "contextual"}
+{"query_id": "au016", "question": "What four kinds of inventions does the Patent Act say can be patented?", "gold_section": "1.6", "type": "direct"}
+{"query_id": "au017", "question": "Can a new way of doing something, such as a particular touchscreen gesture, be protected, or only physical objects?", "gold_section": "1.6", "type": "paraphrase"}
+{"query_id": "au018", "question": "A startup invents a new chemical compound for bonding materials together, along with a method of applying it. Which legal categories of patentable subject matter cover these?", "gold_section": "1.6", "type": "contextual"}
+{"query_id": "au019", "question": "What three criteria must an invention meet to be patented?", "gold_section": "1.7", "type": "direct"}
+{"query_id": "au020", "question": "Can someone protect a general concept for a better device, or only a practical invention that applies that concept?", "gold_section": "1.7", "type": "paraphrase"}
+{"query_id": "au021", "question": "An inventor showed a working prototype at a public trade show 14 months before filing. What rule of the novelty requirement does this raise?", "gold_section": "1.7", "type": "contextual"}
+{"query_id": "au022", "question": "What is a plant patent and which law first created it?", "gold_section": "1.8", "type": "direct"}
+{"query_id": "au023", "question": "Which kind of protection covers a new flower that is propagated without seeds, and which country was the first to grant it?", "gold_section": "1.8", "type": "paraphrase"}
+{"query_id": "au024", "question": "A furniture designer wants protection for the ornamental look of a new chair rather than how it works. Which category of patent does the chapter say covers this?", "gold_section": "1.8", "type": "contextual"}
+{"query_id": "au025", "question": "What fee discounts do small and micro entities get on USPTO patent application fees?", "gold_section": "1.9", "type": "direct"}
+{"query_id": "au026", "question": "Which filing status gives a 75 percent cut in fees, and what income level qualifies an applicant for it?", "gold_section": "1.9", "type": "paraphrase"}
+{"query_id": "au027", "question": "A university lab and a 40-person company both plan to file patent applications. Which filing status applies to each, and do the fee discounts also cover attorneys' fees?", "gold_section": "1.9", "type": "contextual"}
+{"query_id": "au028", "question": "Who is responsible for enforcing an issued U.S. patent, the USPTO or the patent owner?", "gold_section": "2.1", "type": "direct"}
+{"query_id": "au029", "question": "When someone copies a granted invention, does a government office step in, or must the holder take the matter to federal court?", "gold_section": "2.1", "type": "paraphrase"}
+{"query_id": "au030", "question": "An inventor's patent covers a painkiller. A rival improves the drug and wants to sell the improved version. Does the rival's own patent alone let it sell, or does it need permission from the first patent holder?", "gold_section": "2.1", "type": "contextual"}
+{"query_id": "au031", "question": "What is the typical cost range of patent litigation for a case that aims to stop a competitor?", "gold_section": "2.2", "type": "direct"}
+{"query_id": "au032", "question": "A patent owner has little money for a costly case but wants to recover damages. How could a lawyer be paid for the work, and what outside funding exists?", "gold_section": "2.2", "type": "paraphrase"}
+{"query_id": "au033", "question": "A company's only goal is to receive a royalty from a firm using its invention. Should it start with a lawsuit or with a license negotiation, according to the chapter?", "gold_section": "2.2", "type": "contextual"}
+{"query_id": "au034", "question": "What is the first decision a patent owner makes when it decides to sue for infringement?", "gold_section": "2.3", "type": "direct"}
+{"query_id": "au035", "question": "If a company's customers also use an infringing product, can they be named as infringers too?", "gold_section": "2.3", "type": "paraphrase"}
+{"query_id": "au036", "question": "A patent owner wants to sue a firm whose one shareholder controls every decision. Besides the firm itself, which other people can the owner name as defendants?", "gold_section": "2.3", "type": "contextual"}
+{"query_id": "au037", "question": "What can a defendant file in response to a patent infringement complaint?", "gold_section": "2.4", "type": "direct"}
+{"query_id": "au038", "question": "After a lawsuit is filed, what can the accused party do to have the case dismissed or moved to a different court?", "gold_section": "2.4", "type": "paraphrase"}
+{"query_id": "au039", "question": "A company is sued in a federal court far from where it does business and argues that it never acted in that area. Which kinds of motion does the chapter list that could fit this argument?", "gold_section": "2.4", "type": "contextual"}
+{"query_id": "au040", "question": "What must the early disclosures in a patent case cover, such as each side's positions and the witnesses and documents involved?", "gold_section": "2.5", "type": "direct"}
+{"query_id": "au041", "question": "Why do the parties to a federal lawsuit have to reveal their relevant evidence early, and why does the process of requesting it become so expensive?", "gold_section": "2.5", "type": "paraphrase"}
+{"query_id": "au042", "question": "At the first appearance before the judge, the court asks how long information gathering will take and what makes the case unusual. What is this first hearing called?", "gold_section": "2.5", "type": "contextual"}
+{"query_id": "au043", "question": "How are jurors selected for a patent trial?", "gold_section": "2.6", "type": "direct"}
+{"query_id": "au044", "question": "What kinds of personal connections would lead the court to drop a potential juror before a patent case begins?", "gold_section": "2.6", "type": "paraphrase"}
+{"query_id": "au045", "question": "A prospective juror's cousin works for one of the parties in a patent case. Would the chapter treat this as a reason to exclude that juror?", "gold_section": "2.6", "type": "contextual"}
+{"query_id": "au046", "question": "What is inequitable conduct in patent law?", "gold_section": "2.7", "type": "direct"}
+{"query_id": "au047", "question": "If a patentee misled the examiner to get a patent granted, what happens to its ability to enforce that patent?", "gold_section": "2.7", "type": "paraphrase"}
+{"query_id": "au048", "question": "After a jury verdict, what does the losing party usually file in addition to a motion for a new trial?", "gold_section": "2.7", "type": "contextual"}
+{"query_id": "au049", "question": "Which federal appellate court hears appeals in patent cases?", "gold_section": "2.8", "type": "direct"}
+{"query_id": "au050", "question": "What makes it worth a losing party's money to appeal a patent judgment, given how many decisions get changed on appeal?", "gold_section": "2.8", "type": "paraphrase"}
+{"query_id": "au051", "question": "A party appeals a trial court's reading of the patent's claims. Does the appeals court defer to that reading, and why or why not?", "gold_section": "2.8", "type": "contextual"}
+{"query_id": "au052", "question": "What are the two popular alternative dispute resolution methods used to settle disputes outside the courtroom?", "gold_section": "2.9", "type": "direct"}
+{"query_id": "au053", "question": "What process has an impartial expert help opposing sides reach a deal, after each side sends its position in a confidential written brief?", "gold_section": "2.9", "type": "paraphrase"}
+{"query_id": "au054", "question": "Two companies want to settle a patent fight quietly, without a public court record. Which benefit of alternatives to litigation fits this goal?", "gold_section": "2.9", "type": "contextual"}
+{"query_id": "au055", "question": "What is a patent troll?", "gold_section": "2.10", "type": "direct"}
+{"query_id": "au056", "question": "Why do some plaintiffs file patent suits that they are not trying to win at trial, and why do many defendants pay them?", "gold_section": "2.10", "type": "paraphrase"}
+{"query_id": "au057", "question": "A small bakery gets a letter from a company that has never made a product, owns vaguely worded patents and demands a fee to avoid being sued. Which label does the chapter apply to this kind of business?", "gold_section": "2.10", "type": "contextual"}
+{"query_id": "au058", "question": "Which title of the United States Code authorizes copyrights for original works of authorship?", "gold_section": "3.1", "type": "direct"}
+{"query_id": "au059", "question": "Why does the Constitution let Congress secure writings and discoveries to their creators for limited times, and what is that meant to promote?", "gold_section": "3.1", "type": "paraphrase"}
+{"query_id": "au060", "question": "A songwriter asks which clause of the Constitution gives Congress power over authors' writings. What does the chapter cite?", "gold_section": "3.1", "type": "contextual"}
+{"query_id": "au061", "question": "What did the French copyright system of 1498 cover?", "gold_section": "3.2", "type": "direct"}
+{"query_id": "au062", "question": "Before exclusive grants existed, could anyone copy and reproduce printed books, and which Italian city-state first started granting book privileges?", "gold_section": "3.2", "type": "paraphrase"}
+{"query_id": "au063", "question": "A Milanese writer in the 1490s asked a duke for sole rights to his book, saying he would otherwise lose the fruit of his effort. How long was the privilege he received?", "gold_section": "3.2", "type": "contextual"}
+{"query_id": "au064", "question": "How did the Founders' approach to copyright differ from their approach to patents?", "gold_section": "3.3", "type": "direct"}
+{"query_id": "au065", "question": "What did the nation's early leaders not want copyright to create, given that they wanted writers' rights to serve the public's access to learning?", "gold_section": "3.3", "type": "paraphrase"}
+{"query_id": "au066", "question": "An economist cites an inventor of the cotton gin as one of the vital few whose work the nation depended on. Was that economist illustrating the patent side or the copyright side of the system?", "gold_section": "3.3", "type": "contextual"}
+{"query_id": "au067", "question": "Is computer software eligible for copyright protection?", "gold_section": "3.4", "type": "direct"}
+{"query_id": "au068", "question": "Which 1983 appellate ruling treated a computer program as a literary work and so eligible for copyright?", "gold_section": "3.4", "type": "paraphrase"}
+{"query_id": "au069", "question": "A developer asks whether a program's code can be protected even though it is not a book. What does the statute's definition of literary works say about the medium?", "gold_section": "3.4", "type": "contextual"}
+{"query_id": "au070", "question": "How many exclusive rights does copyright law give to owners, and what is the first of them?", "gold_section": "3.5", "type": "direct"}
+{"query_id": "au071", "question": "If someone turns a novel into a film without permission, which exclusive right of the owner does that break?", "gold_section": "3.5", "type": "paraphrase"}
+{"query_id": "au072", "question": "A radio station plays a commercial recording to listeners over an internet audio stream. Which exclusive right of the sound recording owner is involved?", "gold_section": "3.5", "type": "contextual"}
+{"query_id": "au073", "question": "What must a copyright owner prove first to show infringement?", "gold_section": "3.6", "type": "direct"}
+{"query_id": "au074", "question": "Would it matter for copyright infringement if the defendant came up with the same work independently, without copying?", "gold_section": "3.6", "type": "paraphrase"}
+{"query_id": "au075", "question": "A songwriter says another track uses her melody, but the other writer says he composed his song without ever hearing hers. What question does copyright law focus on in this dispute?", "gold_section": "3.6", "type": "contextual"}
+{"query_id": "au076", "question": "Which purposes can make a use of copyrighted material fair use under Title 17?", "gold_section": "3.7", "type": "direct"}
+{"query_id": "au077", "question": "How many factors does the statute use to decide whether a use of copyrighted material is infringement or fair use?", "gold_section": "3.7", "type": "paraphrase"}
+{"query_id": "au078", "question": "A professor makes several copies of a book chapter for a class handout and asks whether this is fair use. Which statutory purpose applies to multiple copies for classroom use?", "gold_section": "3.7", "type": "contextual"}
+{"query_id": "au079", "question": "Which two early court cases dealt with cable television and copyright in 1968 and 1974?", "gold_section": "3.8", "type": "direct"}
+{"query_id": "au080", "question": "How has American copyright law kept pace with inventions such as the radio, the VCR and the internet over more than two centuries?", "gold_section": "3.8", "type": "paraphrase"}
+{"query_id": "au081", "question": "A law student asks which 1976 statute responded to the spread of new media. What is the name of that statute?", "gold_section": "3.8", "type": "contextual"}
+{"query_id": "au082", "question": "What is the Internet Radio Fairness Act?", "gold_section": "3.9", "type": "direct"}
+{"query_id": "au083", "question": "Which federal panel sets royalty rates for streaming music, and what dispute arose over the rate for online streaming compared with satellite radio?", "gold_section": "3.9", "type": "paraphrase"}
+{"query_id": "au084", "question": "Pandora says its per-song rate would amount to 44 percent of revenue, while Sirius pays about 8 percent. What copyright dispute does this illustrate?", "gold_section": "3.9", "type": "contextual"}
+{"query_id": "au085", "question": "What is Creative Commons?", "gold_section": "3.10", "type": "direct"}
+{"query_id": "au086", "question": "An author wants a work shared as widely as possible, with no money involved and with others allowed to add to it. What kind of license was developed for this aim?", "gold_section": "3.10", "type": "paraphrase"}
+{"query_id": "au087", "question": "A photographer releases photos under a licence that lets others build on them, provided they credit the photographer. Does this licence sit outside copyright, or does it rely on it?", "gold_section": "3.10", "type": "contextual"}
+{"query_id": "au088", "question": "Who told Congress in 2013 that the Copyright Act needed a comprehensive review?", "gold_section": "3.11", "type": "direct"}
+{"query_id": "au089", "question": "Why did a copyright official argue the law was under strain, given that fewer people will want physical copies of works?", "gold_section": "3.11", "type": "paraphrase"}
+{"query_id": "au090", "question": "A digital bookstore wants customers to resell e-books the way printed books are resold. Which open reform question in the chapter does this raise?", "gold_section": "3.11", "type": "contextual"}
+{"query_id": "au091", "question": "What did trademarks originally exist to show, and how did they protect the producers who used them?", "gold_section": "4.1", "type": "direct"}
+{"query_id": "au092", "question": "How did a logo that cost $35 to design grow into a mark the chapter values at as much as $20 billion?", "gold_section": "4.1", "type": "paraphrase"}
+{"query_id": "au093", "question": "A competitor starts selling goods under a name that shoppers could mistake for the original company's brand. Which basic function of a trademark is at risk?", "gold_section": "4.1", "type": "contextual"}
+{"query_id": "au094", "question": "Which craftspeople of the Early Bronze Age are said to have invented trademarks by stamping their works?", "gold_section": "4.2", "type": "direct"}
+{"query_id": "au095", "question": "What evidence suggests that ancient craftspeople marked their goods so buyers could trust where they came from?", "gold_section": "4.2", "type": "paraphrase"}
+{"query_id": "au096", "question": "Which medieval institution made the use of trademarks expand considerably?", "gold_section": "4.2", "type": "contextual"}
+{"query_id": "au097", "question": "Why did the Supreme Court in 1879 strike down the first national trademark laws?", "gold_section": "4.3", "type": "direct"}
+{"query_id": "au098", "question": "Congress tried to make trademark law national before 1880. Which constitutional clause did the justices say gave it no explicit power to do this?", "gold_section": "4.3", "type": "paraphrase"}
+{"query_id": "au099", "question": "A later national trademark law that covered marks used with other nations and with Indian tribes relied on a different constitutional power. Which clause was it?", "gold_section": "4.3", "type": "contextual"}
+{"query_id": "au100", "question": "What are the four types of marks that can be registered with the USPTO?", "gold_section": "4.4", "type": "direct"}
+{"query_id": "au101", "question": "What kind of mark identifies the source of a service, such as a repair chain's name, rather than a physical product?", "gold_section": "4.4", "type": "paraphrase"}
+{"query_id": "au102", "question": "A company wants a name that identifies its physical goods, such as shoes or cereal, rather than a service. Which of the two primary mark types fits?", "gold_section": "4.4", "type": "contextual"}
+{"query_id": "au103", "question": "Can a descriptive word or phrase be registered as a trademark?", "gold_section": "4.5", "type": "direct"}
+{"query_id": "au104", "question": "The statute that governs U.S. trademarks does not say what a 'symbol' or 'device' may be. How did the Supreme Court respond to that gap in 1995?", "gold_section": "4.5", "type": "paraphrase"}
+{"query_id": "au105", "question": "A bakery wants to register the everyday phrase 'Fresh Bread Daily' as its brand. What does the chapter say about wording that only describes the product?", "gold_section": "4.5", "type": "contextual"}
+{"query_id": "au106", "question": "What is secondary meaning in trademark law?", "gold_section": "4.6", "type": "direct"}
+{"query_id": "au107", "question": "Why could a cereal name that merely describes its ingredients still be registered, and what kind of evidence proved it?", "gold_section": "4.6", "type": "paraphrase"}
+{"query_id": "au108", "question": "A logo that suggests speed and agility is distinctive from the start, without any years of marketing. Which kind of distinctiveness does the chapter attribute to such marks?", "gold_section": "4.6", "type": "contextual"}
+{"query_id": "au109", "question": "What is the prior use bar in trademark law?", "gold_section": "4.7", "type": "direct"}
+{"query_id": "au110", "question": "Why can a mark not be registered when its design mainly serves a practical purpose? Give the chapter's example involving a fragrance.", "gold_section": "4.7", "type": "paraphrase"}
+{"query_id": "au111", "question": "Two unrelated firms share the name 'Progressive', one making backpacks and one selling car insurance. Is this an exception to the prior use bar?", "gold_section": "4.7", "type": "contextual"}
+{"query_id": "au112", "question": "Which symbol is usually shown on an unregistered trademark?", "gold_section": "4.8", "type": "direct"}
+{"query_id": "au113", "question": "What benefits does federal registration give a trademark owner beyond the rights that come with simply using the mark?", "gold_section": "4.8", "type": "paraphrase"}
+{"query_id": "au114", "question": "A firm wants border officers to stop imports that copy its brand. Which step with U.S. Customs and Border Protection does the chapter recommend?", "gold_section": "4.8", "type": "contextual"}
+{"query_id": "au115", "question": "What standard does the Lanham Act apply to decide whether one mark is too similar to another?", "gold_section": "4.9", "type": "direct"}
+{"query_id": "au116", "question": "When a court decides whether a copycat name infringes, should it compare the marks piece by piece or as a whole?", "gold_section": "4.9", "type": "paraphrase"}
+{"query_id": "au117", "question": "A rival sells sneakers with a check-mark design in a slightly different colour. What question do courts ask about similarity between the two marks?", "gold_section": "4.9", "type": "contextual"}
+{"query_id": "au118", "question": "What remedies are available for trademark infringement?", "gold_section": "4.10", "type": "direct"}
+{"query_id": "au119", "question": "Why do trademark owners usually seek a court order to stop sales rather than focus on the lost revenue?", "gold_section": "4.10", "type": "paraphrase"}
+{"query_id": "au120", "question": "Counterfeit shoes with a famous logo are being shipped into the country from an overseas factory. What does the chapter say the owner is most worried about?", "gold_section": "4.10", "type": "contextual"}
+{"query_id": "au121", "question": "What are the two kinds of trademark fair use that the chapter describes?", "gold_section": "4.11", "type": "direct"}
+{"query_id": "au122", "question": "An independent repair shop names car brands in its advertising to show which cars it services. Which doctrine permits this, and what limit applies?", "gold_section": "4.11", "type": "paraphrase"}
+{"query_id": "au123", "question": "A phone company says in an advertisement that its network coverage beats a named rival's. Does naming the rival count as fair use of its trademark?", "gold_section": "4.11", "type": "contextual"}
+{"query_id": "au124", "question": "What is a trade secret?", "gold_section": "5.1", "type": "direct"}
+{"query_id": "au125", "question": "What is the basic difference between patent law and trade secret law when it comes to making an invention public?", "gold_section": "5.1", "type": "paraphrase"}
+{"query_id": "au126", "question": "A bakery has a secret recipe that gives it an edge. Does the recipe need to be new or physically tangible to be protected, according to the chapter?", "gold_section": "5.1", "type": "contextual"}
+{"query_id": "au127", "question": "In what year did Congress create a federal cause of action for trade secret misappropriation?", "gold_section": "5.2", "type": "direct"}
+{"query_id": "au128", "question": "Which 1837 Massachusetts case is cited as the start of trade secret concepts in American law?", "gold_section": "5.2", "type": "paraphrase"}
+{"query_id": "au129", "question": "A lawyer asks how many states had adopted the Uniform Trade Secrets Act, according to the chapter. What is the figure?", "gold_section": "5.2", "type": "contextual"}
+{"query_id": "au130", "question": "Which two requirements must a piece of information satisfy before the law treats it as a trade secret?", "gold_section": "5.3", "type": "direct"}
+{"query_id": "au131", "question": "Which kinds of knowledge, such as a formula, a pattern or a process, can be protected as trade secrets?", "gold_section": "5.3", "type": "paraphrase"}
+{"query_id": "au132", "question": "A customer database of an insurer was held a trade secret under one state's law but not under another's. Which two states reached those different conclusions?", "gold_section": "5.3", "type": "contextual"}
+{"query_id": "au133", "question": "What does the secrecy requirement for a trade secret demand from its owner?", "gold_section": "5.4", "type": "direct"}
+{"query_id": "au134", "question": "Why would a court examine in detail the security steps a company took to protect its information?", "gold_section": "5.4", "type": "paraphrase"}
+{"query_id": "au135", "question": "An employee took a secret process without being told it was confidential, though a reasonable person in that role would have known. What does a state version of the UTSA say about this?", "gold_section": "5.4", "type": "contextual"}
+{"query_id": "au136", "question": "What are the two ways the UTSA defines misappropriation of a trade secret?", "gold_section": "5.5", "type": "direct"}
+{"query_id": "au137", "question": "Which wrongful methods of obtaining a rival's confidential information does the UTSA prohibit?", "gold_section": "5.5", "type": "paraphrase"}
+{"query_id": "au138", "question": "A competitor hires a spy to photograph a company's blueprints. Which type of misappropriation does this involve?", "gold_section": "5.5", "type": "contextual"}
+{"query_id": "au139", "question": "What remedies does the UTSA provide for trade secret misappropriation?", "gold_section": "5.6", "type": "direct"}
+{"query_id": "au140", "question": "Why can a trade secret owner get a court order against a threatened theft, not only an actual one?", "gold_section": "5.6", "type": "paraphrase"}
+{"query_id": "au141", "question": "A former engineer is about to join a rival, where the engineer could reveal the company's secret design. What kind of court order could the company seek to limit that role?", "gold_section": "5.6", "type": "contextual"}
+{"query_id": "au142", "question": "How long should bread dough rise before it goes into the oven?", "gold_section": null, "type": "out_of_scope"}
+{"query_id": "au143", "question": "What is the best time of year to prune a rose bush?", "gold_section": null, "type": "out_of_scope"}
+{"query_id": "au144", "question": "How do I calculate the monthly payment on a 30-year mortgage?", "gold_section": null, "type": "out_of_scope"}
+{"query_id": "au145", "question": "What causes the seasons on Earth?", "gold_section": null, "type": "out_of_scope"}
+{"query_id": "au146", "question": "How many players are on a standard volleyball team on the court at once?", "gold_section": null, "type": "out_of_scope"}
+{"query_id": "au147", "question": "What are the main symptoms of dehydration in adults?", "gold_section": null, "type": "out_of_scope"}

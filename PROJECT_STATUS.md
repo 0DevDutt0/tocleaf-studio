@@ -1,6 +1,6 @@
 # Project status
 
-Last updated: 10 Nov 2026 (Phase 1, fixture stage).
+Last updated: 11 Nov 2026 (Phase 1; author-written set evaluated; seed 43 done; seed 44 stopped and not rerun).
 
 ## 1. Where things stand
 
@@ -146,7 +146,7 @@ The upstream `stair eval` gives the same top-1 as our unconstrained greedy path,
 1. **Commit and push** the working-tree changes in section 3, if you want them on the branch.
 2. **Second document (blocked).** Phase 1 needs the same chain on one real, legally usable textbook with a nested ToC. The recommended book is the CC BY 4.0 Nursing Assistant textbook (WisTech Open, `wtcs.pressbooks.pub/nurseassist`). On 10 Nov 2026 the site returned an error page to an automated request. A second request with a changed user agent was denied by the auto-mode classifier as bot-check circumvention, and it was not retried. No PDF was retrieved. Options for the user: supply the PDF, or choose another CC BY textbook with an openly downloadable PDF that has a native outline. The pipeline stops on a PDF without an outline, because heading inference is not built.
 3. **Paper-faithful checkpoint selection.** Recall@1 on the dev split with patience 20 is not wired into training (ADR-011).
-4. **Larger evaluation.** More author-written queries, and a larger training set, before comparing methods.
+4. **Larger evaluation.** The 141-query author-written set is evaluated (section 8b). Seed 43 is done. Seed 44 is not finished.
 5. **Upstream evaluation of the constraint.** Upstream's `hallucination_rate` counts parent nodes as valid. Our audit counts them as non-leaf. Report both, as separate definitions.
 6. **Licence and name: decided on 10 Nov 2026** (MIT; "Tocleaf"). See ADR-009 and the README. The upstream training code still has no licence, which the README states.
 
@@ -232,9 +232,36 @@ and commands are in `docs/results/openstax-ip-aug/README.md`.
   the results are exploratory until an independent query set exists; the paper's rule is scaled down (at most 20 epochs,
   patience 5).
 
+## 8b. Author-written query set (10 Nov 2026)
+
+Set: `corpora/openstax-introduction-to-intellectual-property/author_queries.jsonl`: 141 answerable queries (three per leaf
+for all 47 leaves: direct, paraphrase, contextual) and 6 out-of-scope queries. Frozen at SHA-256
+`060c93c45d7137d3deeb30acd93c61fbb61c627ab2ed9f29e4bd58b3e09b0ea8` before any run. Agent-written, not an independent
+annotation. Seven queries were rewritten after a leakage screen; none now reaches content-token Jaccard 0.6 with any
+synthetic question. Protocol, tables and limits: `docs/results/openstax-ip-author/README.md`.
+
+| System (seed 42) | Constrained-beam R@1 | R@3 |
+|---|---|---|
+| BM25 over leaves | 0.780 | 0.936 |
+| Headline (dev R@1 rule pick) | 0.667 | 0.844 |
+| Dev-loss pick, same run | 0.447 | 0.773 |
+| Upstream trainer, augmented data | 0.482 | 0.766 |
+| Earlier run, 200 training queries | 0.468 | 0.674 |
+
+- BM25 vs headline, exact McNemar: 30 against 14 discordant queries, p = 0.023. This is the pre-specified primary test.
+- Selection rule: headline vs dev-loss pick, p = 3e-6. The rule's advantage holds on both query sets.
+- Augmentation: upstream on augmented data vs the earlier run, 0.482 vs 0.468, p = 0.89. The synthetic gain (+17 points,
+  p = 0.096) does not carry over to these queries.
+- Constraint audit: 0 invalid and 0 non-leaf identifiers in all four STAIR runs (6,627 beams each).
+- The lead of BM25 is about 11 points here, against about 28 on the synthetic split, and BM25 is still ahead.
+- Seed 43 done: author set 0.681 (rule pick), synthetic test 0.617, per-seed paired p vs BM25 0.076
+  (`docs/results/openstax-ip-author/seed43_results.json`). Seed 44 stopped about three minutes into training and was not
+  rerun (see section 9).
+
 ## 9. Next milestone
 
-The data effect is now measured (suggestive, +17 points, p = 0.096), and the trainer and rule effect is not distinguishable
-on the same data (+9 points, p = 0.34). The retrieval gap to BM25 (0.936) remains: 0.660 for the headline and 0.574 for
-the upstream run. The next work is an author-written query set that the synthetic generator did not write, and more
-training seeds, before any Phase 2 comparison or generalisation claim.
+The author-written set is evaluated (section 8b). Seed 43 is done: it scores 0.681 on the author set against 0.667 for seed 42,
+and BM25 leads it by 10 points (per-seed p = 0.076, not significant). Seed 44 stopped about three minutes into training on
+10 Nov 2026, when the harness stopped the background launchers under low host memory. It has not been rerun, and a rerun
+needs the user's go-ahead. Phase 2 comparisons and any generalisation claim wait for the seed results. The current evidence
+does not show STAIR ahead of BM25 on independently written queries.

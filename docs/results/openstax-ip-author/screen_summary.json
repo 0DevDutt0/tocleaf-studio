@@ -1,0 +1,45 @@
+{
+  "author_set": {
+    "overall": {
+      "n": 141,
+      "gold_leaf_coverage_mean": 0.692,
+      "gold_leaf_coverage_median": 0.692,
+      "gold_is_top_leaf_lexically": 0.645,
+      "gold_in_top3_lexically": 0.879
+    },
+    "direct": {
+      "n": 47,
+      "gold_leaf_coverage_mean": 0.842,
+      "gold_leaf_coverage_median": 0.833,
+      "gold_is_top_leaf_lexically": 0.787,
+      "gold_in_top3_lexically": 0.979
+    },
+    "paraphrase": {
+      "n": 47,
+      "gold_leaf_coverage_mean": 0.67,
+      "gold_leaf_coverage_median": 0.667,
+      "gold_is_top_leaf_lexically": 0.553,
+      "gold_in_top3_lexically": 0.872
+    },
+    "contextual": {
+      "n": 47,
+      "gold_leaf_coverage_mean": 0.564,
+      "gold_leaf_coverage_median": 0.583,
+      "gold_is_top_leaf_lexically": 0.596,
+      "gold_in_top3_lexically": 0.787
+    }
+  },
+  "synthetic_test": {
+    "n": 47,
+    "gold_leaf_coverage_mean": 0.839,
+    "gold_leaf_coverage_median": 0.857,
+    "gold_is_top_leaf_lexically": 0.872,
+    "gold_in_top3_lexically": 0.957
+  },
+  "leakage_flags": [],
+  "author_max_jaccard_counts": {
+    "0.3": 32,
+    "0.4": 18,
+    "0.5": 9
+  }
+}

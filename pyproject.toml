@@ -2,6 +2,7 @@
 name = "tocleaf"
 version = "0.1.0"
 description = "Tocleaf: local-first, structure-aware document intelligence built on the STAIR retrieval method"
+license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.12"
 # Pins for the packages that determine checkpoint and tokenizer compatibility are

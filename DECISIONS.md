@@ -24,3 +24,5 @@ because of them.
 | 10 Nov 2026 | The author-written query set is reported separately from the synthetic split | the synthetic split is saturated (BM25 R@1 1.000) and cannot separate methods | a larger, independently written query set exists |
 | 10 Nov 2026 | Code was pushed to branch `phase-1-vertical-slice`, not to `main`, and no pull request was opened | default-branch guidance; the user asked for the files to be pushed, not merged | the user asks for a merge or a pull request |
 | 10 Nov 2026 | Fixture training was restarted as r8 with the same settings as r7 | the user asked for the restart after the reaper stopped r7 at step 147 | any change to the training settings |
+| 10 Nov 2026 | Licence: MIT, copyright 0DevDutt0 (LICENSE; README section updated) | the user asked for anyone to be able to use the repository | the user wants an explicit patent grant (then Apache-2.0) |
+| 10 Nov 2026 | Product name stays "Tocleaf" (the repository name and README) | the user asked to follow the repository name unless a better suggestion exists; none was found | the user chooses another name |

@@ -63,5 +63,5 @@ dynamic ToC construction. Each is an experimental extension.
 
 ## Phase 6: release readiness: not started
 
-Testing, profiling, error handling, documentation, screenshots, licence decision (ADR-009), installation instructions,
+Testing, profiling, error handling, documentation, screenshots, licence (MIT, decided on 10 Nov 2026), installation instructions,
 and a README that separates the paper's method from this project's extensions.

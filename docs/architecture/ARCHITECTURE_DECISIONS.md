@@ -90,9 +90,12 @@ Each record states the decision, the evidence behind it, and what would change i
 
 - **Decision.** The product name is **Tocleaf**, as in the repository README. The brief's "STAIR Studio" is kept
   as a description of the research engine only. The name lives in one constant (`branding.py`).
-- **Licence.** Not chosen yet. The repository README says the licence will be added after upstream and dependency
-  licences are reviewed. The fixture PDF is original and may be released once the licence is chosen. The upstream
-  has no licence, so no upstream code is included in any release.
+- **Licence.** MIT, copyright 0DevDutt0, decided by the user on 10 Nov 2026 ("anyone can use this repo"). The
+  repository ships no upstream code and no benchmark data. The fixture PDF and the author-written queries are
+  original and fall under the same licence. The upstream STAIR implementation has no licence of its own; the
+  training path fetches it at setup, and the README says so.
+- **Name.** The user confirmed "Tocleaf" on 10 Nov 2026 and asked for a suggestion only if there was a better
+  option. None was found, so the name stays.
 - **Changes if.** The user chooses a different product name or licence.
 
 ## ADR-010: Validation gates block training

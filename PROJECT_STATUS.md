@@ -148,7 +148,7 @@ The upstream `stair eval` gives the same top-1 as our unconstrained greedy path,
 3. **Paper-faithful checkpoint selection.** Recall@1 on the dev split with patience 20 is not wired into training (ADR-011).
 4. **Larger evaluation.** More author-written queries, and a larger training set, before comparing methods.
 5. **Upstream evaluation of the constraint.** Upstream's `hallucination_rate` counts parent nodes as valid. Our audit counts them as non-leaf. Report both, as separate definitions.
-6. **Licence** (ADR-009) and the product-name decision.
+6. **Licence and name: decided on 10 Nov 2026** (MIT; "Tocleaf"). See ADR-009 and the README. The upstream training code still has no licence, which the README states.
 
 ## 9. Next milestone
 

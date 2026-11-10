@@ -60,4 +60,11 @@ All project evaluation results will be reported from actual experiments with doc
 
 ## License
 
-License and third-party attribution details will be added after reviewing the applicable upstream and dependency licences.
+Tocleaf is released under the [MIT License](LICENSE). Copyright (c) 2026 0DevDutt0.
+
+Third-party material is handled as follows:
+
+- **Upstream STAIR implementation** (`meghanadhpulivarthi/stair-clean`): not included in this repository. Its authors have not published a licence, so the training path fetches it at setup (`scripts/setup_upstream.sh`), and it remains under its authors' terms. Check those terms, or ask the authors for permission, before you train models with it.
+- **SearchTome benchmark**: not included. Its authors released it under CC BY-SA 4.0. Attribution and share-alike terms apply to anything derived from it.
+- **Research paper**: cited, not reproduced (arXiv:2609.03874).
+- **Dependencies** (PyTorch, Transformers, PEFT and others) are used under their own licences, which come with them.

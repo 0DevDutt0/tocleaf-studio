@@ -33,11 +33,14 @@ Exit criterion: a query produces a valid leaf-node result using a trained model,
 | Constrained and unconstrained evaluation | done (fixture) | author set R@1 0.769 (BM25 0.872); synthetic split R@1 0.783 (BM25 1.000); zero invalid or non-leaf outputs |
 | Valid-leaf retrieval result mapped to the section | done (fixture) | constrained outputs are valid leaves; section mapping through canonical ids |
 | Same chain on a real document (OpenStax, 47 leaves) | done | 265 queries; constrained beam R@1 0.404, R@3 0.787; BM25 R@1 0.936; zero invalid or non-leaf outputs |
+| Augmented training data (679 queries), the paper's dev-R@1 rule, same 47 test queries | done | constrained beam R@1 0.660 (earlier run 0.404, McNemar p = 0.0018); same-run dev-loss control 0.426 (p = 0.019); BM25 0.936; `docs/results/openstax-ip-aug/` |
+| Upstream trainer on augmented data (isolates the data effect) | not finished | stopped by the harness at step 429 of 1,700 under critically low memory; WSL processes still running; decision pending |
 
 Remaining Phase 1 work:
 
-1. Retrieval quality is below BM25 on the real document. Improving training data, training and decoding is the next work before Phase 2 comparisons are meaningful.
-2. Decide whether to commit the working-tree changes listed in `PROJECT_STATUS.md`, section 3.
+1. Retrieval quality is below BM25 on the real document: 0.660 against 0.936 on the augmented data. The data effect is unmeasured until the upstream run on augmented data finishes.
+2. Decide whether to let the stopped upstream run finish or stop it and restart it when memory allows.
+3. An author-written query set that the synthetic generator did not write, before any generalisation claim.
 
 ## Phase 2: evaluation and baselines: not started (partly implemented)
 

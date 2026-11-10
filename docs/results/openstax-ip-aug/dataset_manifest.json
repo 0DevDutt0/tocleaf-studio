@@ -1,0 +1,647 @@
+{
+  "dataset_id": "introduction-intellectual-property-d48ea5d01f89",
+  "created_at": "2026-11-10T15:46:00.018957+00:00",
+  "fingerprint_sha256": "d48ea5d01f89e923dc390642d1f40766ce60c9d3357a72f42613150e3a65c072",
+  "source": {
+    "path": "<wsl-home>/stair-work/corpora/introduction-intellectual-property.pdf",
+    "sha256": "1498509864d37cb63a6ccc11bab7c783f3d30b2ed37d808ef80c56fdb676378a",
+    "pages": 201,
+    "book_title": "Introduction to Intellectual Property"
+  },
+  "structure": {
+    "corrections": [
+      {
+        "action": "exclude",
+        "title": "Contents",
+        "page": 7,
+        "reason": "Front matter: the printed table of contents. Its text repeats the ToC rather than describing the book's subject matter.",
+        "level": 0,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 330
+      },
+      {
+        "action": "exclude",
+        "title": "Preface and Foreword",
+        "page": 9,
+        "reason": "Front matter about the publisher and the book's origin, not its subject matter. Also removes its nested entry 'About OpenStax'.",
+        "level": 0,
+        "removed_entries": 2,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 4093
+      },
+      {
+        "action": "exclude",
+        "title": "Chapter Outline",
+        "page": 17,
+        "reason": "Chapter 1 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 52
+      },
+      {
+        "action": "exclude",
+        "title": "Introduction",
+        "page": 18,
+        "reason": "Chapter 1 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 0
+      },
+      {
+        "action": "exclude",
+        "title": "Assessment Questions",
+        "page": 60,
+        "reason": "Chapter 1 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 2005
+      },
+      {
+        "action": "exclude",
+        "title": "Chapter Outline",
+        "page": 65,
+        "reason": "Chapter 2 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 44
+      },
+      {
+        "action": "exclude",
+        "title": "Introduction",
+        "page": 66,
+        "reason": "Chapter 2 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 0
+      },
+      {
+        "action": "exclude",
+        "title": "Assessment Questions",
+        "page": 97,
+        "reason": "Chapter 2 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 1353
+      },
+      {
+        "action": "exclude",
+        "title": "Chapter Outline",
+        "page": 101,
+        "reason": "Chapter 3 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 53
+      },
+      {
+        "action": "exclude",
+        "title": "Introduction",
+        "page": 102,
+        "reason": "Chapter 3 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 0
+      },
+      {
+        "action": "exclude",
+        "title": "Assessment Questions",
+        "page": 135,
+        "reason": "Chapter 3 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 2608
+      },
+      {
+        "action": "exclude",
+        "title": "Chapter Outline",
+        "page": 141,
+        "reason": "Chapter 4 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 47
+      },
+      {
+        "action": "exclude",
+        "title": "Introduction",
+        "page": 141,
+        "reason": "Chapter 4 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 0
+      },
+      {
+        "action": "exclude",
+        "title": "Assessment Questions",
+        "page": 165,
+        "reason": "Chapter 4 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 1927
+      },
+      {
+        "action": "exclude",
+        "title": "Chapter Outline",
+        "page": 171,
+        "reason": "Chapter 5 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 38
+      },
+      {
+        "action": "exclude",
+        "title": "Introduction",
+        "page": 172,
+        "reason": "Chapter 5 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 0
+      },
+      {
+        "action": "exclude",
+        "title": "Assessment Questions",
+        "page": 188,
+        "reason": "Chapter 5 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+        "level": 1,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 1164
+      },
+      {
+        "action": "exclude",
+        "title": "Appendix A Glossary",
+        "page": 191,
+        "reason": "Back matter: glossary entries, organised by chapter. Excluded with its nested chapter entries so that retrieval targets are the chapter sections.",
+        "level": 0,
+        "removed_entries": 6,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 0
+      },
+      {
+        "action": "exclude",
+        "title": "Answer Key",
+        "page": 195,
+        "reason": "Back matter: answers to the assessment questions. Excluded with its nested chapter entries.",
+        "level": 0,
+        "removed_entries": 6,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 781
+      },
+      {
+        "action": "exclude",
+        "title": "Index",
+        "page": 201,
+        "reason": "Back matter: index of terms. Not explanatory content.",
+        "level": 0,
+        "removed_entries": 1,
+        "nested_rules_inside_removed_entry": [],
+        "words_removed": 285
+      },
+      {
+        "action": "remove_lines",
+        "pattern": "^\\d+ \\d+ • .+$",
+        "reason": "Even-page running head: page number, chapter number, bullet and chapter title. Not section content.",
+        "lines_removed": 86
+      },
+      {
+        "action": "remove_lines",
+        "pattern": "^\\d+(\\.\\d+)? • .+ \\d+$",
+        "reason": "Odd-page running head: section number, bullet, section title and page number. Not section content.",
+        "lines_removed": 82
+      }
+    ],
+    "nodes": 52,
+    "leaves": 47,
+    "errors": 0,
+    "validation_passed": true,
+    "issue_counts": {
+      "warning:RUNNING_TEXT_REMOVED": 1,
+      "warning:HEADING_NOT_FOUND": 5,
+      "warning:UNMAPPED_FRONT_MATTER": 1
+    }
+  },
+  "generation": {
+    "model": "qwen3.5:9b",
+    "prompt_version": "tocleaf-qa-v1",
+    "questions_per_passage": 4,
+    "max_passage_words": 1500,
+    "min_words_in_section": 5,
+    "warnings": [
+      "Removed repeated running text ('access for free at openstax.org' on 97 page(s)) and 13 bare page-number line(s) before locating headings.",
+      "'Patent Basics' (page 17) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "'Patent Enforcement' (page 65) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "'Copyright Basics' (page 101) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "'Trademark Basics' (page 141) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "'Trade Secret Basics' (page 171) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "511 words appear before the first outline heading and belong to no section."
+    ],
+    "stats": {
+      "chunks": 69,
+      "attempts": 69,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0,
+      "tolerant_parses": 0,
+      "request_failures": 0,
+      "candidates": 276,
+      "accepted": 265,
+      "rejected_by_reason": {
+        "refers_to_passage": 11
+      },
+      "duplicates_removed": 0,
+      "failed_chunks": []
+    }
+  },
+  "split": {
+    "strategy": "stratified_per_leaf",
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1,
+    "seed": 42
+  },
+  "counts": {
+    "train": 679,
+    "val": 18,
+    "test": 47,
+    "total": 744
+  },
+  "leaf_coverage": {
+    "n0001": {
+      "section": "1.1 The Foundations of Patent Protection",
+      "train": 16,
+      "val": 1,
+      "test": 1
+    },
+    "n0002": {
+      "section": "1.2 The Weakness of Early Patent Systems",
+      "train": 10,
+      "val": 0,
+      "test": 1
+    },
+    "n0003": {
+      "section": "1.3 America’s Uniquely Democratic Patent System",
+      "train": 32,
+      "val": 1,
+      "test": 1
+    },
+    "n0004": {
+      "section": "1.4 The Role of the U.S. Legal System",
+      "train": 18,
+      "val": 1,
+      "test": 1
+    },
+    "n0005": {
+      "section": "1.5 What the U.S. Patent System Wrought",
+      "train": 19,
+      "val": 1,
+      "test": 1
+    },
+    "n0006": {
+      "section": "1.6 Patent-Eligible Inventions",
+      "train": 29,
+      "val": 1,
+      "test": 1
+    },
+    "n0007": {
+      "section": "1.7 Criteria for Patenting",
+      "train": 20,
+      "val": 1,
+      "test": 1
+    },
+    "n0008": {
+      "section": "1.8 Other Types of Patents",
+      "train": 10,
+      "val": 0,
+      "test": 1
+    },
+    "n0009": {
+      "section": "1.9 The Patenting Process",
+      "train": 21,
+      "val": 1,
+      "test": 1
+    },
+    "n0011": {
+      "section": "2.1 The Right to Enforce Patents",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0012": {
+      "section": "2.2 Deciding Whether and How to Enforce a Patent",
+      "train": 10,
+      "val": 0,
+      "test": 1
+    },
+    "n0013": {
+      "section": "2.3 Patent Litigation",
+      "train": 19,
+      "val": 1,
+      "test": 1
+    },
+    "n0014": {
+      "section": "2.4 Getting Started",
+      "train": 8,
+      "val": 0,
+      "test": 1
+    },
+    "n0015": {
+      "section": "2.5 Pretrial Procedures",
+      "train": 18,
+      "val": 1,
+      "test": 1
+    },
+    "n0016": {
+      "section": "2.6 Trial",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0017": {
+      "section": "2.7 Post-Trial Procedures",
+      "train": 32,
+      "val": 1,
+      "test": 1
+    },
+    "n0018": {
+      "section": "2.8 Appeals",
+      "train": 9,
+      "val": 0,
+      "test": 1
+    },
+    "n0019": {
+      "section": "2.9 Litigation Alternatives",
+      "train": 9,
+      "val": 0,
+      "test": 1
+    },
+    "n0020": {
+      "section": "2.10 Patent Trolls and Efforts to Thwart Them",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0022": {
+      "section": "3.1 The Basics of Copyright",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0023": {
+      "section": "3.2 Early Copyright Systems",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0024": {
+      "section": "3.3 Copyright in America",
+      "train": 19,
+      "val": 1,
+      "test": 1
+    },
+    "n0025": {
+      "section": "3.4 Eligible Works",
+      "train": 10,
+      "val": 0,
+      "test": 1
+    },
+    "n0026": {
+      "section": "3.5 Rights and Term",
+      "train": 19,
+      "val": 1,
+      "test": 1
+    },
+    "n0027": {
+      "section": "3.6 Infringement and Remedies",
+      "train": 19,
+      "val": 1,
+      "test": 1
+    },
+    "n0028": {
+      "section": "3.7 The Fair Use Defense",
+      "train": 9,
+      "val": 0,
+      "test": 1
+    },
+    "n0029": {
+      "section": "3.8 Changes in Copyright Law",
+      "train": 34,
+      "val": 1,
+      "test": 1
+    },
+    "n0030": {
+      "section": "3.9 New Technology Challenges to Copyright",
+      "train": 10,
+      "val": 0,
+      "test": 1
+    },
+    "n0031": {
+      "section": "3.10 Alternative Forms of Copyright",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0032": {
+      "section": "3.11 Copyright in a Changing World",
+      "train": 10,
+      "val": 0,
+      "test": 1
+    },
+    "n0034": {
+      "section": "4.1 Core Concepts",
+      "train": 9,
+      "val": 0,
+      "test": 1
+    },
+    "n0035": {
+      "section": "4.2 Early Trademark Systems",
+      "train": 9,
+      "val": 0,
+      "test": 1
+    },
+    "n0036": {
+      "section": "4.3 U.S. Trademark Law",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0037": {
+      "section": "4.4 The Four Types of Trademarks",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0038": {
+      "section": "4.5 The Subject Matter of Trademarks",
+      "train": 20,
+      "val": 1,
+      "test": 1
+    },
+    "n0039": {
+      "section": "4.6 The Spectrum of Distinctiveness",
+      "train": 9,
+      "val": 0,
+      "test": 1
+    },
+    "n0040": {
+      "section": "4.7 Bars to Trademark",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0041": {
+      "section": "4.8 Establishing Trademark Protection",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0042": {
+      "section": "4.9 Trademark Infringement",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0043": {
+      "section": "4.10 Trademark Remedies",
+      "train": 8,
+      "val": 0,
+      "test": 1
+    },
+    "n0044": {
+      "section": "4.11 Fair Use of Trademarks",
+      "train": 8,
+      "val": 0,
+      "test": 1
+    },
+    "n0046": {
+      "section": "5.1 Trade Secret Protection",
+      "train": 11,
+      "val": 0,
+      "test": 1
+    },
+    "n0047": {
+      "section": "5.2 The Foundations of Trade Secrets Law",
+      "train": 9,
+      "val": 0,
+      "test": 1
+    },
+    "n0048": {
+      "section": "5.3 Elements of a Trade Secret",
+      "train": 9,
+      "val": 0,
+      "test": 1
+    },
+    "n0049": {
+      "section": "5.4 The Secrecy Requirement",
+      "train": 21,
+      "val": 1,
+      "test": 1
+    },
+    "n0050": {
+      "section": "5.5 Misappropriation of Trade Secrets",
+      "train": 17,
+      "val": 1,
+      "test": 1
+    },
+    "n0051": {
+      "section": "5.6 Remedies Available for the Misappropriation of Trade Secrets",
+      "train": 18,
+      "val": 1,
+      "test": 1
+    }
+  },
+  "coverage_passed": true,
+  "uncovered_leaves": [],
+  "targets": {
+    "unit": "leaf",
+    "identifier": "canonical node id (toc.json 'id')",
+    "completion_format": "upstream prepare_input_output_stair: '\\n[\"<section_num> <title>\"]'"
+  },
+  "validation_warnings": [
+    {
+      "code": "RUNNING_TEXT_REMOVED",
+      "severity": "warning",
+      "message": "Removed repeated running text ('access for free at openstax.org' on 97 page(s)) and 13 bare page-number line(s) before locating headings.",
+      "node_id": null
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Patent Basics' (page 17) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0000"
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Patent Enforcement' (page 65) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0010"
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Copyright Basics' (page 101) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0021"
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Trademark Basics' (page 141) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0033"
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Trade Secret Basics' (page 171) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0045"
+    },
+    {
+      "code": "UNMAPPED_FRONT_MATTER",
+      "severity": "warning",
+      "message": "511 words appear before the first outline heading and belong to no section.",
+      "node_id": null
+    }
+  ],
+  "augmentation": {
+    "base_dataset_id": "introduction-intellectual-property-8bf57eff85eb",
+    "base_fingerprint_sha256": "8bf57eff85ebfc341783cc621805d518a35761e8f5882e82d9c41539186d3156",
+    "added_train_queries": 479,
+    "generated_candidates": 527,
+    "rejected": {
+      "duplicate_of_existing_query": 39,
+      "near_duplicate_of_validation_or_test": 9
+    },
+    "leakage_threshold_jaccard": 0.6,
+    "questions_per_passage": 8,
+    "max_passage_words": 1500,
+    "model": "qwen3.5:9b",
+    "prompt_version": "tocleaf-qa-v1",
+    "generation_stats": {
+      "chunks": 69,
+      "attempts": 69,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0,
+      "tolerant_parses": 0,
+      "request_failures": 0,
+      "candidates": 552,
+      "accepted": 527,
+      "rejected_by_reason": {
+        "restates_heading": 1,
+        "refers_to_passage": 24
+      },
+      "duplicates_removed": 0,
+      "failed_chunks": []
+    },
+    "validation_and_test_unchanged": true
+  }
+}

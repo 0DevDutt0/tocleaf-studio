@@ -1,0 +1,50 @@
+{
+  "rule_pick_vs_earlier_upstream_run": {
+    "mode": "constrained",
+    "queries": 47,
+    "top1_A": 0.6596,
+    "top1_B": 0.4043,
+    "A_right_B_wrong": 13,
+    "A_wrong_B_right": 1,
+    "net_queries_A_minus_B": 12,
+    "mcnemar_exact_p_two_sided": 0.00183,
+    "A": "openstax-ip-aug-local-r1/per_query.jsonl",
+    "B": "openstax-ip-r1/per_query.jsonl"
+  },
+  "rule_pick_vs_dev_loss_pick_same_run": {
+    "mode": "constrained",
+    "queries": 47,
+    "top1_A": 0.6596,
+    "top1_B": 0.4255,
+    "A_right_B_wrong": 15,
+    "A_wrong_B_right": 4,
+    "net_queries_A_minus_B": 11,
+    "mcnemar_exact_p_two_sided": 0.01921,
+    "A": "openstax-ip-aug-local-r1/per_query.jsonl",
+    "B": "openstax-ip-aug-local-r1-by-loss/per_query.jsonl"
+  },
+  "dev_loss_pick_vs_earlier_upstream_run": {
+    "mode": "constrained",
+    "queries": 47,
+    "top1_A": 0.4255,
+    "top1_B": 0.4043,
+    "A_right_B_wrong": 9,
+    "A_wrong_B_right": 8,
+    "net_queries_A_minus_B": 1,
+    "mcnemar_exact_p_two_sided": 1.0,
+    "A": "openstax-ip-aug-local-r1-by-loss/per_query.jsonl",
+    "B": "openstax-ip-r1/per_query.jsonl"
+  },
+  "rule_pick_vs_bm25": {
+    "mode": "constrained",
+    "queries": 47,
+    "top1_A": 0.6596,
+    "top1_B": 0.9362,
+    "A_right_B_wrong": 1,
+    "A_wrong_B_right": 14,
+    "net_queries_A_minus_B": -13,
+    "mcnemar_exact_p_two_sided": 0.00098,
+    "A": "openstax-ip-aug-local-r1/per_query.jsonl",
+    "B": "openstax-ip-bm25/bm25_per_query.jsonl"
+  }
+}

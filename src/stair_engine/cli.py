@@ -195,7 +195,7 @@ def cmd_train_local(args) -> int:
         seed=args.seed,
     )
     manifest = run_local_training(data_dir=args.data, run_dir=args.run, contract=contract, config=config, device=args.device)
-    print(json.dumps({k: manifest[k] for k in ("best", "duration_seconds", "peak_gpu_memory_mib", "adapter_saved")}, indent=2))
+    print(json.dumps({k: manifest[k] for k in ("best", "best_by_dev_loss", "duration_seconds", "peak_gpu_memory_mib", "adapter_saved")}, indent=2))
     return 0 if manifest["adapter_saved"] else 1
 
 

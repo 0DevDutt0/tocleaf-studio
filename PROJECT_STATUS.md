@@ -201,6 +201,34 @@ Test results on the 47 queries (chance is 1/47 ≈ 0.02):
   The gap to BM25 (about 53 points) is far larger than that.
 - Provenance: `docs/results/openstax-ip/` (sanitised summaries, dataset and run manifests, validation report).
 
+### Augmented-data results (10 Nov 2026)
+
+Same 47 test queries; training set 679 queries (200 original plus 479 generated) instead of 200. Full tables, provenance
+and commands are in `docs/results/openstax-ip-aug/README.md`.
+
+| System | R@1 | R@3 |
+|---|---|---|
+| BM25 over leaves | 0.936 | 1.000 |
+| Local trainer, paper's rule (dev R@1 pick, epoch 14), constrained beam | 0.660 | 0.830 |
+| Local trainer, same run, dev-loss pick (epoch 2), constrained beam | 0.426 | 0.723 |
+| Earlier upstream run (eval-loss pick), 200 training queries, constrained beam | 0.404 | 0.787 |
+
+- **Headline against the earlier run:** 13 queries right only in the headline, 1 right only in the earlier run (exact
+  McNemar p = 0.0018). This comparison also changes the trainer, the tokenisation (the earlier run logged 218
+  boundary-mismatch warnings) and the selection rule, so it does not attribute the gain to the extra queries.
+- **Selection rule, same run:** 15 against 4, p = 0.019. Trainer, data and tokenisation are fixed in this comparison, so
+  it is the cleanest evidence in the set.
+- **Upstream trainer on augmented data (the data-only comparison): not finished.** The harness stopped its background
+  shell at step 429 of 1,700 under critically low host memory. The WSL processes are still running, using about 4 GB of
+  RAM and about 2.9 GB of VRAM. Whether to stop them or let them finish is for the user (section 9).
+- **Correction to an earlier note:** the 14.4 GB peak recorded for the earlier upstream run included Ollama's idle runner
+  (11.5 GB). The trainer itself uses about 2.9 GB.
+- **Caveats:** one seed; 18 dev queries; the 47 test queries were used across several configurations before this run, so
+  the results are exploratory until an independent query set exists; the paper's rule is scaled down (at most 20 epochs,
+  patience 5).
+
 ## 9. Next milestone
 
-Phase 1 technical exit: the chain runs on a real document other than the fixture, and queries return valid leaves that map to their sections. This is now met for the OpenStax textbook. Retrieval quality is well below BM25, and the next work is on the training and decoding side before Phase 2's comparisons are meaningful.
+Decide on the stopped upstream run (let it finish, or stop it and restart it when memory allows), then measure the data
+effect. The retrieval gap is 0.660 R@1 against BM25's 0.936. The next work is an author-written query set that the
+synthetic generator did not write, and more training seeds, before Phase 2 comparisons are meaningful.

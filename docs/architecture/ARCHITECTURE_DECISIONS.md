@@ -134,6 +134,9 @@ Each record states the decision, the evidence behind it, and what would change i
 - **Deviations.** At most 20 epochs with patience 5 (paper: up to 200 epochs with patience 20). The dev split has
   about 18 queries, so the selection is noisy: one query is about 5 points of Recall@1. The optimiser and learning-rate
   schedule match the upstream configuration.
+- **Control (added 10 Nov 2026).** The same run also keeps the lowest-dev-loss adapter (`checkpoint-best-loss`), so the
+  two selection rules can be compared on one trajectory. On the augmented data the dev-Recall@1 pick scores 0.660 and the
+  dev-loss pick 0.426 on the 47 test queries (exact McNemar p = 0.019; `docs/results/openstax-ip-aug/`).
 
 ## ADR-014: Augmentation adds training queries only
 

@@ -3,7 +3,8 @@
 The pinned upstream trainer selects by evaluation loss, and it runs a text-generation callback at every evaluation.
 This trainer follows the paper instead (Section 5.2): it evaluates Recall@1 on the dev split, uses the constrained
 ranking that the evaluator uses, stops when that Recall@1 has not improved for `patience_epochs`, and keeps the best
-adapter. The paper uses up to 200 epochs and patience 20. Those numbers are scaled down here, and the run manifest
+adapter. It also keeps the lowest-dev-loss adapter from the same trajectory, so the two selection rules can be compared
+on identical training. The paper uses up to 200 epochs and patience 20. Those numbers are scaled down here, and the run manifest
 records the values used.
 
 Training uses the same prompt contract and token layout as the upstream trainer, so the adapter loads with the same
@@ -231,6 +232,7 @@ def run_local_training(
     history: list[dict] = []
     best = {"dev_recall_at_1": -1.0, "dev_loss": float("inf"), "epoch": 0}
     best_epoch_index = -1
+    best_by_loss = {"dev_loss": float("inf"), "dev_recall_at_1": None, "epoch": 0}
     started = time.time()
     torch.cuda.reset_peak_memory_stats() if device.startswith("cuda") else None
     order_rng = random.Random(config.seed)
@@ -272,6 +274,11 @@ def run_local_training(
         history.append(entry)
         progress(f"epoch {epoch + 1}: train_loss {entry['train_loss']:.4f} dev_loss {entry['dev_loss']:.4f} dev_R@1 {entry['dev_recall_at_1']:.3f}")
 
+        if dev_loss < best_by_loss["dev_loss"]:
+            # A control: the same trajectory, selected by dev loss instead of dev Recall@1.
+            best_by_loss = {"dev_loss": dev_loss, "dev_recall_at_1": dev_recall, "epoch": epoch + 1}
+            model.save_pretrained(run / "checkpoint-best-loss")
+
         improved = dev_recall > best["dev_recall_at_1"] or (
             dev_recall == best["dev_recall_at_1"] and dev_loss < best["dev_loss"]
         )
@@ -298,6 +305,8 @@ def run_local_training(
             round(torch.cuda.max_memory_allocated() / 2**20) if device.startswith("cuda") else None
         ),
         "adapter_saved": (run / "checkpoint-best" / "adapter_config.json").exists(),
+        "best_by_dev_loss": best_by_loss,
+        "adapter_saved_by_dev_loss": (run / "checkpoint-best-loss" / "adapter_config.json").exists(),
     }
     (run / "run_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return manifest

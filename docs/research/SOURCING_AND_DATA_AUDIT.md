@@ -1,0 +1,82 @@
+# Sourcing and data audit: SearchTome (Hugging Face `meghanadh/SearchTome`)
+
+Audited on 10 Nov 2026. Dataset revision `48d3b3545950b3857dc3657fb22e4b79b8ed8df5`, last modified
+11 Oct 2026. Licence: CC BY-SA 4.0 for the whole release (the card's LICENSE file and metadata agree).
+
+Every statement below is per domain. The release is not one benchmark. Each domain has its own source
+book, its own unit of retrieval, and its own query counts.
+
+## 1. Summary
+
+- The public release contains **six books, one per domain**, and **413 corpus documents** in total.
+  The paper's Table 1 lists **18 books** (three per domain).
+- Three of the six release books appear in the paper's table (finance, medicine, social sciences).
+  Three do not (education, law, natural sciences).
+- Query counts are far lower than the paper's Table 1 counts for the matching books.
+- The release has **no parent nodes**. Every corpus document is a leaf section, and parent titles
+  (chapters) are absent. A ToC for STAIR can therefore only be a leaf-only list, which is a different
+  input from the paper's ToC.
+- Consequence: the public release cannot reproduce the paper's Table 4. Results on it may be reported
+  only as results on "SearchTome release (per domain)", and never compared against Table 4 as a
+  reproduction.
+
+## 2. Per-domain comparison
+
+Numbers come from the released files (`<domain>/corpus.jsonl`, `train/dev/test.jsonl`, `stats.json`) and
+from the paper's Table 1.
+
+| Domain | Release book (card) | Release corpus docs | Numbering in titles | Release train / dev / test | In paper Table 1? | Paper leaves (matching books) | Paper train / dev / test (matching books) |
+|---|---|---|---|---|---|---|---|
+| education | Action Research (CC BY 4.0) | 8 | chapter level only ("1. What is ...") | 308 / 86 / 437 | No | n/a | n/a |
+| finance | Principles of Financial Accounting (CC BY-SA 4.0) | 86 | two and three levels ("1.1", "1.3.1") | 940 / 180 / 1214 | **Yes** (Principles of Financial Accounting, 98 leaves) | 98 | 2395 / 981 / 4119 |
+| law | Introduction to Intellectual Property (CC BY 4.0) | 47 | two levels ("1.1") | 591 / 152 / 820 | No (paper law books: Construction Contracting, Criminal Procedure, Tort Law) | n/a | n/a |
+| medicine | Nursing Assistant (CC BY 4.0) | 121 | two levels | 1473 / 346 / 1996 | **Yes** (Nursing Assistant, 118 leaves) | 118 | 2790 / 1093 / 4586 |
+| natural_sciences | Introduction to Soil Science (CC BY 4.0) | 34 | two levels | 435 / 94 / 579 | No (paper: Introduction to Genetics, Principles of Mechanics, Organic Chemistry) | n/a | n/a |
+| social_sciences | Foundations of Aural Skills (CC BY-SA 4.0) | 117 | two levels ("1.1", "15.10") | 658 / 198 / 959 | **Yes** (Foundations of Aural Skills, 118 leaves) | 118 | 1421 / 559 / 2451 |
+
+Other measured facts:
+
+- Corpus size in words: education 28,925; finance 68,094; law 48,221; medicine 106,559;
+  natural sciences 27,665; social sciences 66,533.
+- Each query's `gold_doc_title` matches exactly one corpus title (checked for education; the card states the
+  same for all domains).
+- No numbered title has a numbered child inside the same corpus, so every corpus document is a leaf in
+  the release. Parent chapter titles are absent for all six domains.
+- Finance's 86 documents and social sciences' 117 documents are close to the paper's leaf counts (98 and
+  118), and medicine's 121 documents is close to 118. The counts are close but not equal, and the query
+  counts differ by roughly half. The release is therefore a related dataset, not the paper's data.
+- Education: 8 documents, each a whole chapter of 2,000 to 5,000 words. This is a chapter-level unit and
+  cannot test leaf retrieval.
+
+## 3. What this means for the project
+
+1. **Phase 2 evaluation** can use five domains as leaf-level sets (finance, law, medicine, natural sciences,
+   social sciences) and a chapter-level set (education). Each is labelled with its unit and its ToC status.
+2. **No parent titles** means the ToC given to STAIR is a leaf list. This is not the paper's input. Results
+   must be labelled "leaf-only ToC (reduced input)", which is a variant under master-prompt section 7, not
+   original STAIR.
+3. **Reconstructing parents** would need the chapter titles from the source textbooks. Those are openly
+   licensed, so the reconstruction is possible, but it creates a new benchmark. It would be labelled
+   "re-derived from source", not "SearchTome".
+4. **Comparisons with Table 4** are not allowed for any release-based result.
+5. **Licence**: CC BY-SA 4.0 applies to the corpora and queries. Any published derivative (for example, a
+   checked-in copy of the corpora, or a model trained on them and shared with the data) needs attribution and
+   share-alike terms. The engine downloads the data on demand and does not commit it.
+
+## 4. Local fixture data and licences
+
+- **Used for tests and the first slice**: `tests/fixtures/irrigation_handbook.pdf`, generated by
+  `tests/fixtures/make_fixture_pdf.py`. Its text was written for this project. It is released under this
+  repository's licence (to be decided, see ADR-009).
+- **Not used**: the upstream sample `data/example_book/sourdough_bread_guide.pdf` (unknown origin and licence,
+  and six flat bookmarks only).
+- **Not yet selected**: a real open textbook with a nested ToC (candidate: one of the release's source books,
+  such as the CC BY 4.0 Nursing Assistant book, which has the richest numbering). Selection needs its own
+  check.
+
+## 5. Synthetic query provenance
+
+Upstream and paper both use an LLM for queries (the paper: Mixtral 8x7B). This project uses a local model
+served by Ollama (`qwen3.5:9b`, reasoning disabled with `reasoning_effort: "none"`), and records the model name,
+prompt version and timestamp in each query's provenance (ADR-008). Queries from this model are synthetic and
+must not be presented as human-written. A small author-written evaluation set is kept separately.

@@ -1,0 +1,47 @@
+[project]
+name = "tocleaf"
+version = "0.1.0"
+description = "Tocleaf: local-first, structure-aware document intelligence built on the STAIR retrieval method"
+readme = "README.md"
+requires-python = ">=3.12"
+# Pins for the packages that determine checkpoint and tokenizer compatibility are
+# copied from the locked versions of the upstream STAIR repository
+# (meghanadhpulivarthi/stair-clean @ 3729c54, uv.lock). Keep them in sync when the
+# upstream pin changes; see docs/research/UPSTREAM_IMPLEMENTATION_AUDIT.md.
+dependencies = [
+    "torch==2.14.0",
+    "transformers==5.17.0",
+    "peft==0.21.1",
+    "accelerate==1.15.0",
+    "pypdfium2==5.13.0",
+    "openai==3.20.0",
+    "pyyaml==6.0.3",
+    "numpy==2.5.3",
+]
+
+[project.optional-dependencies]
+dev = []
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    "reportlab==5.0.1",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "gpu: requires a CUDA GPU and the upstream training environment",
+    "ollama: requires a running local Ollama server",
+]
+
+[project.scripts]
+tocleaf = "stair_engine.cli:main"

@@ -1,0 +1,43 @@
+{"query_id": "a001", "question": "What sources can irrigation water come from?", "gold_section": "1.1", "type": "direct"}
+{"query_id": "a002", "question": "Where does the water for watering the fields originate, such as storage lakes or pumped groundwater?", "gold_section": "1.1", "type": "paraphrase"}
+{"query_id": "a003", "question": "Why should a grower check how salty the water is before the growing season starts?", "gold_section": "1.1", "type": "contextual"}
+{"query_id": "a004", "question": "What is field capacity?", "gold_section": "1.2.1", "type": "direct"}
+{"query_id": "a005", "question": "How much moisture does a loam soil keep once the excess water has drained away?", "gold_section": "1.2.1", "type": "paraphrase"}
+{"query_id": "a006", "question": "Does water that goes beyond what the soil can hold stay available to plant roots?", "gold_section": "1.2.1", "type": "contextual"}
+{"query_id": "a007", "question": "What is the permanent wilting point?", "gold_section": "1.2.2", "type": "direct"}
+{"query_id": "a008", "question": "At what soil moisture level do plants stop being able to take water from the ground?", "gold_section": "1.2.2", "type": "paraphrase"}
+{"query_id": "a009", "question": "If a sandy loam holds about 12 percent water at field capacity, how much of that can plants really use?", "gold_section": "1.2.2", "type": "contextual"}
+{"query_id": "a010", "question": "How long can waterlogging last before cereal roots are damaged?", "gold_section": "1.3", "type": "direct"}
+{"query_id": "a011", "question": "What happens to crop roots when excess water stays in the field for two days?", "gold_section": "1.3", "type": "paraphrase"}
+{"query_id": "a012", "question": "What should a farmer do about a field that never dries out after rain?", "gold_section": "1.3", "type": "contextual"}
+{"query_id": "a013", "question": "What does ET0 mean?", "gold_section": "2.1", "type": "direct"}
+{"query_id": "a014", "question": "How is the water lost from a grass surface under local weather measured each day?", "gold_section": "2.1", "type": "paraphrase"}
+{"query_id": "a015", "question": "Why would the same crop need twice the water on one day compared with another day in the same growth stage?", "gold_section": "2.1", "type": "contextual"}
+{"query_id": "a016", "question": "What is the crop coefficient during the initial stage?", "gold_section": "2.2.1", "type": "direct"}
+{"query_id": "a017", "question": "Right after planting, before the canopy covers the ground, what coefficient applies to water use?", "gold_section": "2.2.1", "type": "paraphrase"}
+{"query_id": "a018", "question": "Why is light and frequent irrigation recommended early in the season?", "gold_section": "2.2.1", "type": "contextual"}
+{"query_id": "a019", "question": "What is the crop coefficient at full canopy for maize?", "gold_section": "2.2.2", "type": "direct"}
+{"query_id": "a020", "question": "When the crop is fully leafed out, which growth period is the most sensitive to running short of water?", "gold_section": "2.2.2", "type": "paraphrase"}
+{"query_id": "a021", "question": "Which phase of growth loses most of its water through the leaves?", "gold_section": "2.2.2", "type": "contextual"}
+{"query_id": "a022", "question": "What coefficient should a field close to harvest use?", "gold_section": "2.2.3", "type": "direct"}
+{"query_id": "a023", "question": "When leaves age and drop, how should irrigation change near harvest time?", "gold_section": "2.2.3", "type": "paraphrase"}
+{"query_id": "a024", "question": "Why would a grower reduce watering shortly before the crop is harvested?", "gold_section": "2.2.3", "type": "contextual"}
+{"query_id": "a025", "question": "How should soil moisture sensors be calibrated?", "gold_section": "2.3", "type": "direct"}
+{"query_id": "a026", "question": "What reference measurements are used to check the readings of a moisture probe?", "gold_section": "2.3", "type": "paraphrase"}
+{"query_id": "a027", "question": "Why do sensor readings need to be checked again for each soil type?", "gold_section": "2.3", "type": "contextual"}
+{"query_id": "a028", "question": "When should irrigation start according to the common scheduling rule?", "gold_section": "3.1", "type": "direct"}
+{"query_id": "a029", "question": "What share of the water a soil can supply to plants may be used up before the root zone is refilled?", "gold_section": "3.1", "type": "paraphrase"}
+{"query_id": "a030", "question": "How is the depth of an irrigation application worked out?", "gold_section": "3.1", "type": "contextual"}
+{"query_id": "a031", "question": "What affects the cost of pumping water?", "gold_section": "3.2.1", "type": "direct"}
+{"query_id": "a032", "question": "Why does lifting water from a deeper well increase the electricity bill?", "gold_section": "3.2.1", "type": "paraphrase"}
+{"query_id": "a033", "question": "How can a worn pump double the energy bill?", "gold_section": "3.2.1", "type": "contextual"}
+{"query_id": "a034", "question": "What labour is needed to keep an irrigation system running?", "gold_section": "3.2.2", "type": "direct"}
+{"query_id": "a035", "question": "How do automated controllers change the weekly hours that workers spend on the irrigation system?", "gold_section": "3.2.2", "type": "paraphrase"}
+{"query_id": "a036", "question": "Does a drip system need fewer labour hours than furrow irrigation?", "gold_section": "3.2.2", "type": "contextual"}
+{"query_id": "a037", "question": "How do districts usually charge for water?", "gold_section": "3.3", "type": "direct"}
+{"query_id": "a038", "question": "What happens to the unit price of water when a farmer uses more than the seasonal allocation?", "gold_section": "3.3", "type": "paraphrase"}
+{"query_id": "a039", "question": "Why might tiered pricing reduce water use in dry years?", "gold_section": "3.3", "type": "contextual"}
+{"query_id": "u001", "question": "How often should a tractor's engine oil be changed?", "gold_section": null, "type": "unanswerable"}
+{"query_id": "u002", "question": "Which tomato variety is best for greenhouse production?", "gold_section": null, "type": "unanswerable"}
+{"query_id": "u003", "question": "Who won the chemistry Nobel prize in 2019?", "gold_section": null, "type": "unanswerable"}
+{"query_id": "u004", "question": "What are the legal water rights rules in another country?", "gold_section": null, "type": "unanswerable"}

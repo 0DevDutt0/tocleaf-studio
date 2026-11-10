@@ -1,0 +1,28 @@
+{
+  "max_seq_length": 2048,
+  "splits": {
+    "train": {
+      "examples": 65,
+      "min_tokens": 280,
+      "median_tokens": 288,
+      "max_tokens": 298
+    },
+    "val": {
+      "examples": 13,
+      "min_tokens": 279,
+      "median_tokens": 288,
+      "max_tokens": 302
+    },
+    "test": {
+      "examples": 23,
+      "min_tokens": 281,
+      "median_tokens": 287,
+      "max_tokens": 295
+    }
+  },
+  "toc_tokens": 140,
+  "boundary_mismatch_examples": 101,
+  "overflow_examples": 0,
+  "max_tokens_overall": 302,
+  "passed": true
+}

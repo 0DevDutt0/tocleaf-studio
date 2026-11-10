@@ -1,0 +1,154 @@
+{
+  "dataset_id": "irrigation_handbook-3bc5f11f3fca",
+  "created_at": "2026-11-10T10:24:11.009636+00:00",
+  "fingerprint_sha256": "3bc5f11f3fca371c2e64c7ed958e61646b1f41c009f3faff461bd927234d99b4",
+  "source": {
+    "path": "tests/fixtures/irrigation_handbook.pdf",
+    "sha256": "a5793c44b9a4bec00ce9df50904f7ff737b35f7b85f193332076b0d0ab08aadb",
+    "pages": 3,
+    "book_title": "Practical Irrigation Scheduling"
+  },
+  "structure": {
+    "nodes": 19,
+    "leaves": 13,
+    "errors": 0,
+    "validation_passed": true,
+    "issue_counts": {
+      "warning:RUNNING_TEXT_REMOVED": 1
+    }
+  },
+  "generation": {
+    "model": "qwen3.5:9b",
+    "prompt_version": "tocleaf-qa-v1",
+    "questions_per_passage": 8,
+    "max_passage_words": 900,
+    "min_words_in_section": 5,
+    "warnings": [
+      "Removed repeated running text ('practical irrigation scheduling' on 3 page(s)) and 3 bare page-number line(s) before locating headings."
+    ],
+    "stats": {
+      "chunks": 13,
+      "attempts": 13,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0,
+      "tolerant_parses": 1,
+      "request_failures": 0,
+      "candidates": 104,
+      "accepted": 101,
+      "rejected_by_reason": {
+        "refers_to_passage": 1,
+        "restates_heading": 2
+      },
+      "duplicates_removed": 0,
+      "failed_chunks": []
+    }
+  },
+  "split": {
+    "strategy": "stratified_per_leaf",
+    "train": 0.7,
+    "val": 0.1,
+    "test": 0.2,
+    "seed": 42
+  },
+  "counts": {
+    "train": 65,
+    "val": 13,
+    "test": 23,
+    "total": 101
+  },
+  "leaf_coverage": {
+    "n0001": {
+      "section": "1.1 Water Sources",
+      "train": 5,
+      "val": 1,
+      "test": 1
+    },
+    "n0003": {
+      "section": "1.2.1 Field Capacity",
+      "train": 5,
+      "val": 1,
+      "test": 1
+    },
+    "n0004": {
+      "section": "1.2.2 Permanent Wilting Point",
+      "train": 5,
+      "val": 1,
+      "test": 1
+    },
+    "n0005": {
+      "section": "1.3 Drainage",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0007": {
+      "section": "2.1 Evapotranspiration",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0009": {
+      "section": "2.2.1 Initial Stage",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0010": {
+      "section": "2.2.2 Mid-Season Stage",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0011": {
+      "section": "2.2.3 Late Season Stage",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0012": {
+      "section": "2.3 Sensor Calibration",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0014": {
+      "section": "3.1 Irrigation Scheduling",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0016": {
+      "section": "3.2.1 Pumping Costs",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0017": {
+      "section": "3.2.2 Labour Costs",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    },
+    "n0018": {
+      "section": "3.3 Water Pricing",
+      "train": 5,
+      "val": 1,
+      "test": 2
+    }
+  },
+  "coverage_passed": true,
+  "uncovered_leaves": [],
+  "targets": {
+    "unit": "leaf",
+    "identifier": "canonical node id (toc.json 'id')",
+    "completion_format": "upstream prepare_input_output_stair: '\\n[\"<section_num> <title>\"]'"
+  },
+  "validation_warnings": [
+    {
+      "code": "RUNNING_TEXT_REMOVED",
+      "severity": "warning",
+      "message": "Removed repeated running text ('practical irrigation scheduling' on 3 page(s)) and 3 bare page-number line(s) before locating headings.",
+      "node_id": null
+    }
+  ]
+}

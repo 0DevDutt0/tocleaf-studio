@@ -1,0 +1,32 @@
+# Python environments (the pre-existing STAIR/ venv and uv-managed .venv must never be committed)
+/STAIR/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Node / frontend build output (later phases)
+node_modules/
+dist/
+
+# Generated pipeline outputs: documents, datasets, checkpoints, reports
+runs/
+data/generated/
+data/uploads/
+data/workspace/
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+
+# Browser-review artifacts from Playwright MCP
+.playwright-mcp/
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+*.key

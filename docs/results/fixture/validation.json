@@ -1,0 +1,18 @@
+{
+  "source": "tests/fixtures/irrigation_handbook.pdf",
+  "source_sha256": "a5793c44b9a4bec00ce9df50904f7ff737b35f7b85f193332076b0d0ab08aadb",
+  "pages": 3,
+  "nodes": 19,
+  "leaves": 13,
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    {
+      "code": "RUNNING_TEXT_REMOVED",
+      "severity": "warning",
+      "message": "Removed repeated running text ('practical irrigation scheduling' on 3 page(s)) and 3 bare page-number line(s) before locating headings.",
+      "node_id": null
+    }
+  ],
+  "generated_at": "2026-11-10T10:23:12.066097+00:00"
+}

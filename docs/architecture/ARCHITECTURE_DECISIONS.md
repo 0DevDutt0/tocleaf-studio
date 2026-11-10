@@ -53,9 +53,14 @@ Each record states the decision, the evidence behind it, and what would change i
 ## ADR-006: Implement constrained decoding in this project
 
 - **Decision.** The trie is built from the **exact target tokens** TRL used for training (`inference/contract.py`).
-  Beam search runs with a prefix-restricting callable. Violations are counted in an audit that must be zero.
+  The constrained result is the **exact ranking** of the valid leaves under constrained generation: each step is
+  renormalised over the trie's valid continuations, computed by teacher forcing, so no beam pruning or length
+  normalisation can change the order. Beam search with a prefix-restricting callable runs alongside as a generation
+  check, with width equal to the leaf count and unnormalised scores. Violations are counted in an audit that must be zero.
 - **Evidence.** Upstream has no constrained decoding (see the audit, section 4.1). The paper's Stage 3 says
   "restricting the output vocabulary to valid ToC leaf nodes" without an algorithm.
+  Evidence from the fixture: a beam narrower than the leaf set, with length-normalised scores, gave R@1 0.590
+  against an exact 0.769 on the same queries. The beam's top-1 agrees with the exact top-1 on 38 of 39 queries.
 - **Limits.** Output is restricted to the trie, so a non-leaf or unknown label cannot be produced. Measured
   effect is reported separately from the unconstrained modes.
 - **Changes if.** The paper or a later version specifies a different mechanism.

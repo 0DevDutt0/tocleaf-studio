@@ -59,17 +59,42 @@ def build_leaf_trie(tokenizer, view, probe_prompt: str) -> tuple[TokenTrie, dict
 
 
 def _summaries(rows: list[dict]) -> dict[str, dict]:
-    return {
-        "constrained": summarise_queries(
-            [{"ranked": r["modes"]["constrained"]["ranked"], "gold": r["gold"], "top_status": r["modes"]["constrained"]["top_status"], "items": r["modes"]["constrained"]["items"]} for r in rows]
-        ),
-        "unconstrained": summarise_queries(
-            [{"ranked": r["modes"]["unconstrained"]["ranked"], "gold": r["gold"], "top_status": r["modes"]["unconstrained"]["top_status"], "items": r["modes"]["unconstrained"]["items"]} for r in rows]
-        ),
-        "unconstrained_upstream_prompt": summarise_queries(
-            [{"ranked": r["modes"]["unconstrained_upstream_prompt"]["ranked"], "gold": r["gold"], "top_status": r["modes"]["unconstrained_upstream_prompt"]["top_status"], "items": r["modes"]["unconstrained_upstream_prompt"]["items"]} for r in rows]
-        ),
-    }
+    def block(mode: str) -> list[dict]:
+        return [
+            {"ranked": r["modes"][mode]["ranked"], "gold": r["gold"], "top_status": r["modes"][mode]["top_status"], "items": r["modes"][mode]["items"]}
+            for r in rows
+        ]
+
+    return {mode: summarise_queries(block(mode)) for mode in ("constrained", "constrained_exact", "constrained_full_vocab", "unconstrained", "unconstrained_upstream_prompt")}
+
+
+def score_leaves_exhaustively(model, prefix: list[int], sequences: dict[str, list[int]], trie: TokenTrie, device: str) -> tuple[dict[str, float], dict[str, float]]:
+    """Exact scores for every valid leaf, computed without beam search.
+
+    full: log-probability of the leaf under the unrestricted model (the model's own belief).
+    restricted: log-probability under constrained generation, where each step is renormalised over the
+    valid continuations in the trie. This is the distribution a constrained decoder samples from.
+    """
+    import torch
+
+    full: dict[str, float] = {}
+    restricted: dict[str, float] = {}
+    for leaf_id, target_ids in sequences.items():
+        sequence = torch.tensor([prefix + target_ids], device=device)
+        with torch.no_grad():
+            logits = model(input_ids=sequence).logits[0].float()
+        start = len(prefix)
+        full_log_probs = torch.log_softmax(logits[start - 1 : -1], dim=-1)
+        full_total = 0.0
+        restricted_total = 0.0
+        for step, token in enumerate(target_ids):
+            full_total += float(full_log_probs[step, token])
+            allowed = trie.allowed_next(tuple(target_ids[:step]))
+            step_logits = logits[start - 1 + step][torch.tensor(allowed, device=device)]
+            restricted_total += float(torch.log_softmax(step_logits, dim=-1)[allowed.index(token)])
+        full[leaf_id] = full_total
+        restricted[leaf_id] = restricted_total
+    return full, restricted
 
 
 def run_stair_evaluation(
@@ -151,19 +176,23 @@ def run_stair_evaluation(
         attention_train = torch.ones_like(input_train)
         attention_upstream = torch.ones_like(input_upstream)
 
+        # Beam as wide as the valid leaf set, unnormalised scores (length_penalty=0) and no early stop, so the
+        # beam ranks every valid leaf by its total log-probability instead of pruning or length-normalising.
+        width = max(beams, trie.leaf_count)
         t0 = time.time()
         with torch.no_grad():
             beam_out = model.generate(
                 input_ids=input_train,
                 attention_mask=attention_train,
-                num_beams=beams,
-                num_return_sequences=beams,
+                num_beams=width,
+                num_return_sequences=width,
                 max_new_tokens=max_new_tokens,
                 do_sample=False,
                 prefix_allowed_tokens_fn=prefix_fn,
                 eos_token_id=eos_id,
                 pad_token_id=pad_id,
-                early_stopping=True,
+                early_stopping=False,
+                length_penalty=0.0,
             )
         constrained_latency = time.time() - t0
         generated = beam_out[:, len(train_ids) :].tolist()
@@ -176,6 +205,17 @@ def run_stair_evaluation(
             {"text": view.label_by_id[leaf], "status": "valid_leaf", "node_id": leaf} for leaf in ranked_constrained
         ]
 
+        full_scores, restricted_scores = score_leaves_exhaustively(model, train_ids, sequences, trie, device)
+        ranked_exact = sorted(restricted_scores, key=lambda leaf: -restricted_scores[leaf])
+        ranked_full = sorted(full_scores, key=lambda leaf: -full_scores[leaf])
+        exact_items = [
+            {"text": view.label_by_id[leaf], "status": "valid_leaf", "node_id": leaf, "logprob": round(restricted_scores[leaf], 4)}
+            for leaf in ranked_exact
+        ]
+        full_items = [
+            {"text": view.label_by_id[leaf], "status": "valid_leaf", "node_id": leaf, "logprob": round(full_scores[leaf], 4)}
+            for leaf in ranked_full
+        ]
         t1 = time.time()
         with torch.no_grad():
             greedy_train = model.generate(
@@ -217,6 +257,16 @@ def run_stair_evaluation(
                         "top_status": "valid_leaf" if constrained_items else "unparseable",
                         "latency_seconds": round(constrained_latency, 4),
                     },
+                    "constrained_exact": {
+                        "ranked": ranked_exact,
+                        "items": exact_items,
+                        "top_status": "valid_leaf" if exact_items else "unparseable",
+                    },
+                    "constrained_full_vocab": {
+                        "ranked": ranked_full,
+                        "items": full_items,
+                        "top_status": "valid_leaf" if full_items else "unparseable",
+                    },
                     "unconstrained": {
                         "raw": raw_train,
                         "ranked": list(classified_train.ranked_leaf_ids),
@@ -257,11 +307,14 @@ def run_stair_evaluation(
         "adapter": str(adapter_path),
         "base_model": base_model_name,
         "prompt_contract_sha256": contract.sha256,
-        "decoding": {"beams": beams, "max_new_tokens": max_new_tokens, "constrained": "beam search over token trie"},
+        "decoding": {"beam_width": "valid leaf count", "length_penalty": 0.0, "early_stopping": False, "max_new_tokens": max_new_tokens, "constrained": "beam search over token trie, unnormalised scores"},
         "constraint_audit": audit.to_dict(),
         "queries": len(per_query),
         "elapsed_seconds": round(elapsed, 1),
         "summaries": summaries,
+        "beam_vs_exact_top1_agreement": sum(
+            1 for r in per_query if r["modes"]["constrained"]["ranked"][:1] == r["modes"]["constrained_exact"]["ranked"][:1]
+        ) / max(1, len(per_query)),
         "by_type": by_type,
         "raw_samples": raw_samples,
     }

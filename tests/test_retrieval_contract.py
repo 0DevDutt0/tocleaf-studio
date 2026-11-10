@@ -196,3 +196,24 @@ def test_completion_and_prompts_match_the_pinned_upstream(tmp_path):
         )
         labels = {"n0002": "1.1 Alpha", "n0003": "1.2 Beta"}
         assert out[0]["completion"] == completion_text([labels[r] for r in reference])
+
+
+def test_padded_finished_hypotheses_are_not_counted_as_violations():
+    import torch
+
+    trie = TokenTrie({"a": [1, 2, 9]})
+    audit = ConstraintAudit()
+    fn = make_prefix_allowed_tokens_fn(trie, prefix_length=1, eos_token_id=9, audit=audit)
+    finished = torch.tensor([100, 1, 2, 9, 0, 0])  # prompt token, leaf a with end-of-turn, then padding
+    assert fn(0, finished) == [9]
+    assert audit.unknown_prefix_steps == 0
+
+
+def test_an_invalid_prefix_is_counted_by_the_audit():
+    import torch
+
+    trie = TokenTrie({"a": [1, 2, 9]})
+    audit = ConstraintAudit()
+    fn = make_prefix_allowed_tokens_fn(trie, prefix_length=1, eos_token_id=9, audit=audit)
+    fn(0, torch.tensor([100, 5]))  # 5 cannot start any valid leaf
+    assert audit.unknown_prefix_steps == 1

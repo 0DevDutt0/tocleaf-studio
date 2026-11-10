@@ -84,13 +84,16 @@ def make_prefix_allowed_tokens_fn(trie: TokenTrie, prefix_length: int, eos_token
     """Build the callable that transformers' beam search uses to restrict the next token."""
 
     def allowed(_batch_id: int, input_ids) -> list[int]:
-        generated = tuple(int(token) for token in input_ids[prefix_length:].tolist())
-        candidates = trie.allowed_next(generated)
-        if not candidates:
-            # A complete leaf is a finished hypothesis, and its only legal continuation is end-of-turn.
-            # Anything else here means the model left the trie, which the audit must report.
-            if trie.leaf_for(generated) is None:
+        generated = [int(token) for token in input_ids[prefix_length:].tolist()]
+        if eos_token_id in generated:
+            # Finished hypothesis: beam search pads after end-of-turn. Only the part up to end-of-turn counts.
+            finished = tuple(generated[: generated.index(eos_token_id) + 1])
+            if trie.leaf_for(finished) is None:
                 audit.unknown_prefix_steps += 1
+            return [eos_token_id]
+        candidates = trie.allowed_next(tuple(generated))
+        if not candidates:
+            audit.unknown_prefix_steps += 1
             return [eos_token_id]
         return candidates
 

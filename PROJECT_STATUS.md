@@ -1,16 +1,14 @@
 # Project status
 
-Last updated: 10 Nov 2026 (Phase 1 in progress). Nothing is committed or pushed.
+Last updated: 10 Nov 2026 (Phase 1, fixture stage).
 
-## 1. Summary
+## 1. Where things stand
 
-- **Phase 0 (research and compatibility): done.** Paper, upstream and dataset audited; upstream environment,
-  CLI and tests verified on the GPU; per-domain sourcing audit written. See `docs/research/`.
-- **Phase 1 (vertical slice): in progress.** The pipeline runs from a PDF to validated structure, synthetic
-  queries, a dataset, token preflight and the pinned upstream trainer. Constrained and unconstrained evaluation is
-  implemented; its first run on a trained adapter is pending the training result in section 4.
-- **No paper result is reproduced.** The public SearchTome release is not the paper's benchmark (see the
-  sourcing audit). Every number below comes from this project's own fixture.
+- **Committed and pushed** to branch `phase-1-vertical-slice` on `0DevDutt0/tocleaf-studio`: commits `2cd39bf` (pipeline, docs, tests) and `836be65` (`.gitattributes`). `main` is unchanged. No pull request is open.
+- **Not committed** (working tree on the same branch): the constrained-decoder fixes, exact scoring, the audit fix, two audit tests, the result files in `docs/results/fixture/`, and these status files. See section 3.
+- **Phase 0 (research and compatibility): done.**
+- **Phase 1 (vertical slice): partly met.** On the fixture document, the full chain runs: PDF, validated structure, synthetic queries, dataset, training with the pinned upstream trainer, and constrained evaluation. Every constrained output is a valid leaf. Retrieval accuracy is in section 5. Phase 1 is complete only when the same chain runs on a real document with a nested ToC (section 8).
+- **No paper result is reproduced.** The public SearchTome release does not match the paper's benchmark (`docs/research/SOURCING_AND_DATA_AUDIT.md`). Every number here comes from our fixture: 13 leaves and 65 training queries.
 
 ## 2. Completed features
 
@@ -19,133 +17,139 @@ Last updated: 10 Nov 2026 (Phase 1 in progress). Nothing is committed or pushed.
 | PDF outline, page text, heading location, page ranges | `structure/pdf_reader.py`, `structure/build.py` | `test_structure.py` |
 | Printed and generated section numbers; hierarchy and order checks | `structure/tree.py` | `test_structure.py` |
 | Running header/footer and page-number removal, reported | `structure/pdf_reader.py` | `test_structure.py` |
-| Validation report and blocking gate | `structure/build.py`, `pipeline.py` | `test_structure.py`, CLI |
-| Synthetic queries via OpenAI-compatible endpoint; retries; tolerant parse; provenance; failure budget | `synthetic/llm.py`, `synthetic/qa.py` | `test_synthetic_and_dataset.py` |
-| Dataset writer: canonical ids, stratified split, coverage gate, fingerprint, manifest | `dataset/build.py` | `test_synthetic_and_dataset.py` |
-| Preflight: sequence length, boundary-mismatch count; dataset gates | `dataset/preflight.py` | CLI (fixture run) |
-| Upstream prompt contract read from the pinned checkout | `inference/contract.py` | `test_retrieval_contract.py` (incl. upstream parity) |
+| Validation report and blocking gate | `structure/build.py`, `pipeline.py` | `test_structure.py` |
+| Synthetic queries via an OpenAI-compatible endpoint; retries; tolerant parsing; provenance; failure budget | `synthetic/llm.py`, `synthetic/qa.py` | `test_synthetic_and_dataset.py`, `test_gates_and_adapters.py` |
+| Dataset: canonical ids, leaf-stratified split, coverage gate, fingerprint, manifest | `dataset/build.py` | `test_synthetic_and_dataset.py` |
+| Preflight: sequence length, boundary-mismatch count; dataset gates | `dataset/preflight.py` | `test_gates_and_adapters.py`; CLI run |
+| Upstream prompt contract read from the pinned checkout | `inference/contract.py` | `test_retrieval_contract.py` (upstream parity) |
 | Token layout matching TRL 1.14 prompt-completion behaviour | `inference/contract.py` | `test_tokenization.py` (real Qwen tokenizer) |
-| Token trie and constrained beam decoding with an audit | `inference/constrained.py` | `test_retrieval_contract.py` |
-| Upstream training adapter: fresh run dir, own environment, GPU sampling, manifest | `training/upstream.py` | exercised by fixture runs |
+| Token trie; constrained beam decoding; audit of violations | `inference/constrained.py` | `test_retrieval_contract.py` |
+| Upstream trainer adapter: fresh run directory, own environment, GPU sampling, run manifest | `training/upstream.py` | `test_gates_and_adapters.py`; r8 run |
+| Exact leaf scoring: restricted (constrained distribution) and full-vocabulary | `evaluation/stair_runner.py` | CLI run; agreement with beam (section 5.3) |
 | Metrics (recall, hit, MRR, nDCG) and failure classification | `evaluation/metrics.py` | `test_retrieval_contract.py` |
-| BM25 baseline over leaves | `evaluation/bm25.py`, `pipeline.py` | `test_retrieval_contract.py`; fixture runs |
-| Author-written query set with out-of-scope queries | `evaluation/queries.py`, `tests/fixtures/author_queries.jsonl` | CLI (fixture runs) |
-| STAIR evaluation: constrained, unconstrained, upstream-prompt unconstrained | `evaluation/stair_runner.py` | pending (needs adapter) |
+| BM25 baseline over leaves | `evaluation/bm25.py`, `pipeline.py` | `test_retrieval_contract.py`; CLI run |
+| Query sets: synthetic split or author-written file with out-of-scope queries | `evaluation/queries.py` | CLI run |
 
-Unit tests: **60 passed** (WSL, `pytest -q`; includes the real-tokenizer tests and the upstream parity test). Upstream tests: **122 passed** (in the pinned checkout).
+**Unit tests: 62 passed** (`uv run pytest -q`, WSL). **Upstream tests: 122 passed** (pinned checkout, earlier run).
 
-## 3. Modified and created files
+## 3. Changes since the pushed commit
 
-Created: `pyproject.toml`, `.gitignore`, `src/stair_engine/**` (23 modules), `tests/**` (5 test modules, fixtures),
-`scripts/setup_upstream.sh`, `scripts/setup_env.sh`, `docs/**` (6 documents), `IMPLEMENTATION_PLAN.md`,
-`PROJECT_STATUS.md`, `DECISIONS.md`, `uv.lock` (generated by `uv sync`).
-Modified: none of the user's files. `README.md` is unchanged (it is the user's text; its update is Phase 6).
+Working-tree changes, not yet committed (`git status` on the branch):
 
-## 4. Training: fixture run
+- Modified code: `src/stair_engine/inference/constrained.py` (the audit counts only real violations; padding after end-of-turn in finished beams is not counted) and `src/stair_engine/evaluation/stair_runner.py` (beam width equals the valid leaf count, `length_penalty=0`, `early_stopping=False`; exact restricted and full-vocabulary leaf scoring; the beam-versus-exact agreement statistic).
+- Modified tests: `tests/test_retrieval_contract.py` (two audit tests, 62 tests in total).
+- Modified docs: `PROJECT_STATUS.md`, `IMPLEMENTATION_PLAN.md`, `DECISIONS.md`, `docs/architecture/ARCHITECTURE_DECISIONS.md` (ADR-006).
+- New result files in `docs/results/fixture/`: `r8_author_queries_summary.json`, `r8_synthetic_summary.json`, `r8_upstream_stair_eval_metrics.json`, `r8_run_manifest.json`, `r8_trainer_state.json`, `bm25_synthetic_summary.json`. The WSL home path is replaced by `<wsl-home>`.
 
-Dataset: `irrigation_handbook` (our fixture), 101 queries over 13 leaves (train 65, val 13, test 23), fingerprint
-`3bc5f11f3fca…` (from `manifest.json`). Queries generated by `qwen3.5:9b` (Ollama, reasoning off).
+Already committed in `2cd39bf` and unchanged since: the `--queries` option, `summarise_by_type`, `queries.py`, and the author-written query set.
 
-Commands (WSL):
+## 4. Training runs on the fixture
 
-```
-tocleaf analyze tests/fixtures/irrigation_handbook.pdf --out <ws>
-tocleaf build-dataset tests/fixtures/irrigation_handbook.pdf --workspace <ws> --questions-per-passage 8 --train 0.7 --val 0.1 --test 0.2
-tocleaf preflight --data <ws>/dataset --upstream <upstream>
-tocleaf train --data <ws>/dataset --run <run> --epochs 20 --batch-size 4 --grad-accum 2 --eval-interval 90 --patience 6
-```
+Dataset: `irrigation_handbook` (our fixture). 101 synthetic queries over 13 leaves: train 65, validation 13, test 23. Queries generated by `qwen3.5:9b` through Ollama, reasoning disabled. Dataset fingerprint `3bc5f11f3fca…`.
 
-Run attempts (all in `~/stair-work/runs/`):
+| Run | Outcome |
+|---|---|
+| `fixture-r1` | killed before any step: the upstream ran in the shared venv, and uv installed upstream packages into this project's venv. Fixed; the adapter now pins upstream's `.venv` |
+| `fixture-r2`, `fixture-r3`, `fixture-r5` | killed before any step: SIGHUP when the launching WSL session ended, or a `timeout` wrapper ended it |
+| `fixture-r4` | stopped by us at step 16, to avoid the slow evaluation pattern (section 6, item 9) |
+| `fixture-r6` | stopped by us during the start evaluation, for the same reason |
+| `fixture-r7` | stopped by Claude Code's memory-pressure reaper at step 147 of 180. `checkpoint-90` saved, eval loss 0.2825. No best checkpoint and no manifest |
+| **`fixture-r8`** | **completed.** Restart with the same settings as r7 |
 
-| Run | Outcome | Cause |
-|---|---|---|
-| `fixture-r1` | killed, no training step | launched with `UV_PROJECT_ENVIRONMENT` exported: uv installed upstream packages into this project's venv; stopped, environment re-synced |
-| `fixture-r2` | killed, no training step | `nohup` child received SIGHUP when the WSL session ended |
-| `fixture-r3` | killed, no training step | a `timeout 60` wrapper ended the WSL session |
-| `fixture-r4` | stopped by us at step 16 | progressing, but each evaluation runs the upstream text callback (up to 2048 generated tokens, twice) so evaluation dominated the run; eval loss 0.879 → 0.319 (step 8) → 0.169 (step 16) |
-| `fixture-r5` | killed, no training step | `timeout 60` wrapper ended the session (third time) |
-| `fixture-r6` | stopped by us during the start evaluation | each generation callback took minutes; eval interval 30 would mean seven evaluations (14 callback generations) |
-| `fixture-r7` | **stopped by Claude Code's memory-pressure reaper at step 147 of 180** | eval interval 90 (start and step 90). Saved `checkpoint-90` (eval loss 0.2825). No `checkpoint-best`, no manifest. Not restarted: the reaper message asked that restarts wait for the user |
+Settings for r8: upstream model `Qwen/Qwen2.5-0.5B-Instruct`; LoRA rank 16, alpha 32, dropout 0.1, seven projection targets; 20 epochs (180 steps); learning rate 1e-4 with constant schedule and 20 warm-up steps; batch 4 with gradient accumulation 2; sequence limit 2048; evaluation and save every 90 steps; early-stopping patience 6.
 
-`fixture-r4` details recorded so the slow path is documented: the upstream `report-train` on a partial run prints
-"stopped early at epoch 0.1" and "learning rate may be too low". Both diagnostics assume a finished run and are not
-findings.
+Results from `docs/results/fixture/r8_run_manifest.json` and `r8_trainer_state.json`:
 
-Boundary mismatch: the trainer logged "Mismatch between tokenized prompt…" **78 times** in `fixture-r4`, once per
-training and validation example (65 + 13), matching the preflight count of 101 across all splits.
-
-Peak GPU memory, duration and success are read from `run_manifest.json` for `fixture-r7` and reported in section 5.
+- Return code 0; `success: true`; duration 219.6 s; adapter saved.
+- Checkpoints: `checkpoint-90`, `checkpoint-180`, `checkpoint-best`. `checkpoint-best` is byte-identical to `checkpoint-90` (checked with `cmp`). Its adapter is 35 MB.
+- Evaluation loss: 0.8792 before training, 0.2009 at step 90 (best), 0.3076 at step 180. The final checkpoint is worse on evaluation loss.
+- Training loss reached 0.0 by steps 162–180, which means the 65 training examples are memorised.
+- Boundary-mismatch warnings: 78, one per train and validation example (65 + 13). TRL logs the mismatch on every example (section 6, item 11).
+- Peak GPU memory on the card: 14,237 MiB, of which about 11,522 MiB belonged to the Ollama runner. Training therefore used about 2.7 GB (estimated from the difference).
 
 ## 5. Results
 
-Results are added only from completed runs with recorded configurations.
+All results use this project's fixture. The model is the same across modes, so only decoding procedures and methods are compared. One query is 2.6 points on the author-written set and 4.3 points on the synthetic split. Differences of one or two queries are within noise.
 
-### 5.1 BM25 on the synthetic test split (23 queries)
+### 5.1 Author-written set: 39 answerable queries, 4 out of scope
 
-R@1 = 1.00, R@3 = 1.00, MRR@10 = 1.00. **Saturated**: the synthetic queries reuse their passage's vocabulary, so lexical
-retrieval is easy. This split cannot separate methods, and it is not reported as a result.
+Written by this project's engineering agent after the fixture text, before any model was run, and not tuned on results. Not an independent annotation.
 
-### 5.2 BM25 on the author-written set (39 answerable queries, 4 out of scope)
-
-| Query type | n | R@1 | R@3 | MRR@10 |
+| Decoding or method | R@1 | R@3 | Invalid id. | Non-leaf id. |
 |---|---|---|---|---|
-| direct | 13 | 1.000 | 1.000 | 1.000 |
-| paraphrase | 13 | 0.923 | 1.000 | 0.949 |
-| contextual | 13 | 0.692 | 0.923 | 0.808 |
-| all | 39 | 0.872 | 0.974 | — |
+| STAIR, constrained beam (width 13, total log-probability) | 0.744 | 0.949 | 0 | 0 |
+| **STAIR, constrained exact (per-step renormalised over valid leaves)** | **0.769** | **0.949** | 0 | 0 |
+| STAIR, full-vocabulary exact (valid leaves ranked by model probability) | 0.769 | 0.949 | 0 | 0 |
+| STAIR, unconstrained greedy (training input) | 0.769 | 0.769 | 0 | 0 |
+| STAIR, unconstrained greedy (upstream prompt input) | 0.744 | 0.744 | 0 | 0 |
+| BM25 over leaves | 0.872 | 0.974 | — | — |
 
-The author-written queries were written after the fixture text, before any model was run, and not tuned on results.
-They were written by this project's engineering agent, not by an independent annotator, so they share the
-fixture's author.
+By query type (R@1, STAIR constrained exact | BM25):
 
-### 5.3 STAIR
+| Type | n | STAIR | BM25 |
+|---|---|---|---|
+| direct | 13 | 0.846 | 1.000 |
+| paraphrase | 13 | 0.692 | 0.923 |
+| contextual | 13 | 0.769 | 0.692 |
 
-Pending: the fixture-r5 adapter. Three modes will be reported with the constraint audit (must show zero violations for
-the constrained mode).
+On this set STAIR is below BM25 on direct and paraphrase queries and slightly above it on contextual ones.
 
-## 6. GPU observations
+### 5.2 Synthetic test split: 23 queries
 
-- GPU: NVIDIA GeForce RTX 5090 Laptop GPU, 24,463 MiB, driver 592.01, CUDA 13.1 (driver), torch 2.14.0+cu130.
-- Ollama's runner held about 11.5 GB at idle; during the QA run it grew to about 23.9 GB until the model was unloaded
-  with `keep_alive: 0`.
-- Training: peak usage is recorded per run (`run_manifest.json`, `gpu_memory.csv`).
+| Decoding or method | R@1 | R@3 |
+|---|---|---|
+| STAIR, constrained beam / exact / full-vocabulary | 0.783 | 0.913 |
+| STAIR, unconstrained greedy (training input or upstream prompt) | 0.783 | 0.783 |
+| Upstream `stair eval` on the same checkpoint (independent code) | 0.783 | 0.783 |
+| BM25 | 1.000 | 1.000 |
 
-## 7. Issues found and status
+The upstream `stair eval` gives the same top-1 as our unconstrained greedy path, and its reported hallucination rate is 0.00%. That cross-checks our harness on the greedy path. BM25 is saturated on this split, because the synthetic queries reuse their passage's wording, so the split cannot separate methods.
+
+### 5.3 Constraint audit and agreement
+
+- Every constrained mode returned only valid leaves: 0 invalid identifiers, 0 non-leaf identifiers, and 0 sequences outside the trie. Audit: 507 beams on the author set and 299 on the synthetic split, with 0 unknown-prefix states.
+- Beam top-1 agrees with the exact constrained top-1 on 38 of 39 author queries (0.974) and on all 23 synthetic queries (1.000). Beam order below top-1 is not exact, so the exact ranking is the one reported as the constrained method.
+- Upstream prompt versus training input: 0.744 versus 0.769 on the author set, and identical on the synthetic split. The boundary-mismatch effect (section 6, item 11) is small here and changes one query.
+
+### 5.4 Interpretation
+
+- The model is trained on 65 queries over 13 leaves, and its best checkpoint is at step 90. A paper-scale claim (STAIR above BM25) needs far more training data and a real corpus. This fixture cannot test it.
+- The fixture result shows the pipeline works and that constrained decoding returns only valid leaves. The comparison with BM25 shows where this small model is weak (direct and paraphrase queries). It is not a conclusion about the method.
+
+## 6. Issues found and status
 
 | # | Issue | Status |
 |---|---|---|
-| 1 | Upstream trainer ran in the shared venv when `UV_PROJECT_ENVIRONMENT` was exported | fixed: adapter pins the upstream `.venv` |
-| 2 | Training killed by SIGHUP when the launching WSL session ended | worked around: run through a session that stays open (see memory note) |
-| 3 | Constrained decoder assumed a fixed prefix length; prefix length depends on the query | fixed before any evaluation ran; regression test in `test_tokenization.py` |
-| 4 | QA parse failure silently dropped a leaf (initial stage) | fixed: retries, recorded losses, coverage gate |
-| 5 | Model output with a stray quote made strict JSON fail | fixed: tolerant pairing, counted separately |
-| 6 | Numbers printed in bookmark titles produced labels like "1.1 1.1 Water Sources" | fixed: printed numbers are the section number, checked for order and nesting |
-| 7 | Running header text entered every section | fixed: removed when repeated, reported, outline titles protected |
-| 8 | Thinking model returned empty content | fixed: `reasoning_effort: "none"` (verified) |
-| 9 | Upstream training callback generates up to 2048 tokens twice at every evaluation, so evaluations dominate run time | open: upstream behaviour; mitigated by fewer evaluations (interval 90); not patched upstream |
-| 10 | Fixture synthetic test split is saturated for BM25 | recorded; author-written set used for discrimination |
-| 11 | Mismatch between training prefix and prompt tokenisation (all examples) | characterised; our constrained decoding uses the trained input; unconstrained modes report both inputs |
-| 12 | Claude Code stopped the background training job under memory pressure (host had about 4 GB free of 31 GB; WSL VM about 6.7 GB) | open, awaiting the user's decision: restart (about 10 minutes, since the callbacks dominate and the steps themselves are fast), or evaluate `checkpoint-90` first |
+| 1 | Upstream trainer ran in the shared venv when `UV_PROJECT_ENVIRONMENT` was exported | Fixed: the adapter pins upstream's `.venv` |
+| 2 | Background training killed by SIGHUP when the launching session ended | Worked around: `setsid -w` in a background Bash task, with no `timeout` wrapper |
+| 3 | Constrained decoder assumed a fixed prefix length; the prefix depends on the query | Fixed before any evaluation; regression test in `test_tokenization.py` |
+| 4 | QA parse failure silently dropped a leaf | Fixed: retries, recorded losses, coverage gate |
+| 5 | Model output with a stray quote failed strict JSON | Fixed: tolerant pairing, counted separately |
+| 6 | Printed numbers in bookmark titles produced labels like "1.1 1.1 Water Sources" | Fixed: printed numbers are the section number, checked for order and nesting |
+| 7 | Running headers entered section text | Fixed: removed when repeated, reported, outline titles protected |
+| 8 | Thinking model returned empty content | Fixed: `reasoning_effort: "none"` (verified) |
+| 9 | Upstream callback generates up to 2048 tokens twice per evaluation, so evaluation dominated run time | Open. Upstream behaviour, not patched. Mitigated by fewer evaluations |
+| 10 | Synthetic split is saturated for BM25 | Recorded. The author-written set discriminates |
+| 11 | Boundary mismatch on every example: TRL tokenises prompt and completion jointly, and the prompt's trailing newline merges with the completion's leading newline | Characterised. Constrained decoding uses the trained input. The upstream-prompt mode reports the difference (section 5.3) |
+| 12 | Claude Code's memory-pressure reaper stopped the background training at step 147 (host about 4 GB free) | Resolved by a restart once memory recovered (about 10 GB free). Background runs can be reaped the same way |
+| 13 | **Constrained beam ranked leaves wrongly.** The beam was narrower than the leaf set (10 for 13 leaves), and Hugging Face length-normalised finished scores. Top-1 was 0.590 and R@3 0.641, against an exact R@3 of 0.949 | Fixed: beam width equals the leaf count, `length_penalty=0`, no early stop. The exact restricted ranking is now the constrained result. Both changes were checked against an independent teacher-forced computation |
+| 14 | Audit counted padded finished hypotheses as violations (107 false positives) | Fixed: only real violations are counted. Two tests added |
 
-## 7a. Interruption: fixture-r7
+## 7. GPU and memory observations
 
-At the time of the stop: step 147 of 180, `checkpoint-90` saved with eval loss 0.2825, and no `checkpoint-best` or `run_manifest.json`. The steps ran at about 3 iterations per second; the upstream generation callback (two per evaluation) accounted for most of the elapsed time.
-
-Host memory at the stop: Windows 31.4 GB total, 4.2 GB free; `vmmemWSL` 6.7 GB; WSL reports 11.9 GB total. GPU: 11.5 GB used, all by the Ollama runner (PID 31904). No trainer processes remained afterwards.
-
-Nothing was restarted. No evaluation has run on any adapter yet.
+- GPU: NVIDIA GeForce RTX 5090 Laptop GPU, 24,463 MiB, driver 592.01, CUDA 13.1 (driver), torch 2.14.0+cu130.
+- Ollama's runner holds about 11,522 MiB at idle. Training used about 2.7 GB on top of that (estimate).
+- Host memory: at the r7 stop, Windows had 4.2 GB free of 31.4 GB, with `vmmemWSL` at 6.7 GB. At the r8 launch, 10.2 GB was free.
 
 ## 8. Remaining tasks
 
-1. Read `fixture-r5`: adapter saved, loss curve, peak GPU memory, return code, boundary warnings.
-2. Run `eval-stair` (constrained, unconstrained, upstream-prompt) on the author set and the synthetic split; check
-   the constraint audit is zero.
-3. Run the upstream `stair eval` on the same run for comparison, and record its validity definition's effect (parents
-   count as valid there).
-4. Run `eval-bm25` and `eval-stair` on a real open textbook with a nested ToC (not the fixture only).
-5. Decide the repository licence (ADR-009) and whether to commit (not done; the user has not asked).
+1. **Commit and push** the working-tree changes in section 3, if you want them on the branch.
+2. **Second document.** Phase 1 needs the same chain on one real, legally usable textbook with a nested ToC (candidates in `SOURCING_AND_DATA_AUDIT.md`). Without it, Phase 1 is not complete.
+3. **Paper-faithful checkpoint selection.** Recall@1 on the dev split with patience 20 is not wired into training (ADR-011).
+4. **Larger evaluation.** More author-written queries, and a larger training set, before comparing methods.
+5. **Upstream evaluation of the constraint.** Upstream's `hallucination_rate` counts parent nodes as valid. Our audit counts them as non-leaf. Report both, as separate definitions.
+6. **Licence** (ADR-009) and the product-name decision.
 
 ## 9. Next milestone
 
-Phase 1 exit: a query returns a valid leaf for a trained model, mapped to the correct section, on a document other than
-the fixture. Phase 2 starts after that.
+Phase 1 exit: the chain runs on a real document other than the fixture, and a query returns a valid leaf that maps to the correct section. Phase 2 starts after that.

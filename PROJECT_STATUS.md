@@ -211,6 +211,7 @@ and commands are in `docs/results/openstax-ip-aug/README.md`.
 | BM25 over leaves | 0.936 | 1.000 |
 | Local trainer, paper's rule (dev R@1 pick, epoch 14), constrained beam | 0.660 | 0.830 |
 | Local trainer, same run, dev-loss pick (epoch 2), constrained beam | 0.426 | 0.723 |
+| Upstream trainer on augmented data (eval-loss pick, step 255), constrained beam | 0.574 | 0.787 |
 | Earlier upstream run (eval-loss pick), 200 training queries, constrained beam | 0.404 | 0.787 |
 
 - **Headline against the earlier run:** 13 queries right only in the headline, 1 right only in the earlier run (exact
@@ -218,9 +219,13 @@ and commands are in `docs/results/openstax-ip-aug/README.md`.
   boundary-mismatch warnings) and the selection rule, so it does not attribute the gain to the extra queries.
 - **Selection rule, same run:** 15 against 4, p = 0.019. Trainer, data and tokenisation are fixed in this comparison, so
   it is the cleanest evidence in the set.
-- **Upstream trainer on augmented data (the data-only comparison): not finished.** The harness stopped its background
-  shell at step 429 of 1,700 under critically low host memory. The WSL processes are still running, using about 4 GB of
-  RAM and about 2.9 GB of VRAM. Whether to stop them or let them finish is for the user (section 9).
+- **Data-only comparison (upstream trainer, same selection rule): 0.574 against 0.404, p = 0.096.** 13 queries right only
+  in the augmented run, 5 only in the earlier one. Suggestive, not significant at 0.05.
+- **Trainer and rule on the same augmented data:** the headline against the upstream run is 0.660 against 0.574 (7
+  against 3 queries, p = 0.34). Not distinguishable at 47 queries.
+- **Upstream run on augmented data: finished** (exit 0, 719 s, eval-loss pick at step 255, stopped at step 765 by
+  patience 6). The harness had stopped its background shell at step 429 under critically low host memory. The WSL
+  processes kept running and finished without intervention; no process was killed or restarted.
 - **Correction to an earlier note:** the 14.4 GB peak recorded for the earlier upstream run included Ollama's idle runner
   (11.5 GB). The trainer itself uses about 2.9 GB.
 - **Caveats:** one seed; 18 dev queries; the 47 test queries were used across several configurations before this run, so
@@ -229,6 +234,7 @@ and commands are in `docs/results/openstax-ip-aug/README.md`.
 
 ## 9. Next milestone
 
-Decide on the stopped upstream run (let it finish, or stop it and restart it when memory allows), then measure the data
-effect. The retrieval gap is 0.660 R@1 against BM25's 0.936. The next work is an author-written query set that the
-synthetic generator did not write, and more training seeds, before Phase 2 comparisons are meaningful.
+The data effect is now measured (suggestive, +17 points, p = 0.096), and the trainer and rule effect is not distinguishable
+on the same data (+9 points, p = 0.34). The retrieval gap to BM25 (0.936) remains: 0.660 for the headline and 0.574 for
+the upstream run. The next work is an author-written query set that the synthetic generator did not write, and more
+training seeds, before any Phase 2 comparison or generalisation claim.

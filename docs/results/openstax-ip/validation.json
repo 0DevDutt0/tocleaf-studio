@@ -1,0 +1,268 @@
+{
+  "source": "<wsl-home>/stair-work/corpora/introduction-intellectual-property.pdf",
+  "source_sha256": "1498509864d37cb63a6ccc11bab7c783f3d30b2ed37d808ef80c56fdb676378a",
+  "pages": 201,
+  "nodes": 52,
+  "leaves": 47,
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    {
+      "code": "RUNNING_TEXT_REMOVED",
+      "severity": "warning",
+      "message": "Removed repeated running text ('access for free at openstax.org' on 97 page(s)) and 13 bare page-number line(s) before locating headings.",
+      "node_id": null
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Patent Basics' (page 17) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0000"
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Patent Enforcement' (page 65) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0010"
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Copyright Basics' (page 101) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0021"
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Trademark Basics' (page 141) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0033"
+    },
+    {
+      "code": "HEADING_NOT_FOUND",
+      "severity": "warning",
+      "message": "'Trade Secret Basics' (page 171) was not found in the page text. Its section text is empty, so it will not generate training questions.",
+      "node_id": "n0045"
+    },
+    {
+      "code": "UNMAPPED_FRONT_MATTER",
+      "severity": "warning",
+      "message": "511 words appear before the first outline heading and belong to no section.",
+      "node_id": null
+    }
+  ],
+  "corrections": [
+    {
+      "action": "exclude",
+      "title": "Contents",
+      "page": 7,
+      "reason": "Front matter: the printed table of contents. Its text repeats the ToC rather than describing the book's subject matter.",
+      "level": 0,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 330
+    },
+    {
+      "action": "exclude",
+      "title": "Preface and Foreword",
+      "page": 9,
+      "reason": "Front matter about the publisher and the book's origin, not its subject matter. Also removes its nested entry 'About OpenStax'.",
+      "level": 0,
+      "removed_entries": 2,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 4093
+    },
+    {
+      "action": "exclude",
+      "title": "Chapter Outline",
+      "page": 17,
+      "reason": "Chapter 1 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 52
+    },
+    {
+      "action": "exclude",
+      "title": "Introduction",
+      "page": 18,
+      "reason": "Chapter 1 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 0
+    },
+    {
+      "action": "exclude",
+      "title": "Assessment Questions",
+      "page": 60,
+      "reason": "Chapter 1 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 2005
+    },
+    {
+      "action": "exclude",
+      "title": "Chapter Outline",
+      "page": 65,
+      "reason": "Chapter 2 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 44
+    },
+    {
+      "action": "exclude",
+      "title": "Introduction",
+      "page": 66,
+      "reason": "Chapter 2 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 0
+    },
+    {
+      "action": "exclude",
+      "title": "Assessment Questions",
+      "page": 97,
+      "reason": "Chapter 2 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 1353
+    },
+    {
+      "action": "exclude",
+      "title": "Chapter Outline",
+      "page": 101,
+      "reason": "Chapter 3 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 53
+    },
+    {
+      "action": "exclude",
+      "title": "Introduction",
+      "page": 102,
+      "reason": "Chapter 3 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 0
+    },
+    {
+      "action": "exclude",
+      "title": "Assessment Questions",
+      "page": 135,
+      "reason": "Chapter 3 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 2608
+    },
+    {
+      "action": "exclude",
+      "title": "Chapter Outline",
+      "page": 141,
+      "reason": "Chapter 4 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 47
+    },
+    {
+      "action": "exclude",
+      "title": "Introduction",
+      "page": 141,
+      "reason": "Chapter 4 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 0
+    },
+    {
+      "action": "exclude",
+      "title": "Assessment Questions",
+      "page": 165,
+      "reason": "Chapter 4 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 1927
+    },
+    {
+      "action": "exclude",
+      "title": "Chapter Outline",
+      "page": 171,
+      "reason": "Chapter 5 list of sections. Unnumbered in the outline, so it conflicts with the printed section numbers, and it has no explanatory text.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 38
+    },
+    {
+      "action": "exclude",
+      "title": "Introduction",
+      "page": 172,
+      "reason": "Chapter 5 introduction entry. Unnumbered in the outline and has no body text in the PDF, so it conflicts with the printed section numbers.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 0
+    },
+    {
+      "action": "exclude",
+      "title": "Assessment Questions",
+      "page": 188,
+      "reason": "Chapter 5 exercise set. Questions for students rather than explanatory content, so excluded from the retrieval targets.",
+      "level": 1,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 1164
+    },
+    {
+      "action": "exclude",
+      "title": "Appendix A Glossary",
+      "page": 191,
+      "reason": "Back matter: glossary entries, organised by chapter. Excluded with its nested chapter entries so that retrieval targets are the chapter sections.",
+      "level": 0,
+      "removed_entries": 6,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 0
+    },
+    {
+      "action": "exclude",
+      "title": "Answer Key",
+      "page": 195,
+      "reason": "Back matter: answers to the assessment questions. Excluded with its nested chapter entries.",
+      "level": 0,
+      "removed_entries": 6,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 781
+    },
+    {
+      "action": "exclude",
+      "title": "Index",
+      "page": 201,
+      "reason": "Back matter: index of terms. Not explanatory content.",
+      "level": 0,
+      "removed_entries": 1,
+      "nested_rules_inside_removed_entry": [],
+      "words_removed": 285
+    },
+    {
+      "action": "remove_lines",
+      "pattern": "^\\d+ \\d+ • .+$",
+      "reason": "Even-page running head: page number, chapter number, bullet and chapter title. Not section content.",
+      "lines_removed": 86
+    },
+    {
+      "action": "remove_lines",
+      "pattern": "^\\d+(\\.\\d+)? • .+ \\d+$",
+      "reason": "Odd-page running head: section number, bullet, section title and page number. Not section content.",
+      "lines_removed": 82
+    }
+  ],
+  "generated_at": "2026-11-10T12:23:40.643635+00:00"
+}

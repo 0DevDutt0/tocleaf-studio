@@ -17,7 +17,7 @@ Exit criterion: the upstream pipeline can be invoked, and every blocker is docum
   benchmark, so no reproduction claim is made.
 - Architecture recorded: `docs/architecture/INITIAL_ARCHITECTURE.md`, `ARCHITECTURE_DECISIONS.md`.
 
-## Phase 1: core STAIR vertical slice: partly met
+## Phase 1: core STAIR vertical slice: technical chain met on real documents; retrieval quality not yet adequate
 
 Exit criterion: a query produces a valid leaf-node result using a trained model, mapped to the correct document section. Tested on the fixture only.
 
@@ -32,10 +32,11 @@ Exit criterion: a query produces a valid leaf-node result using a trained model,
 | Real training with the pinned upstream trainer | done (fixture) | run `fixture-r8`: 180 steps, adapter saved, best checkpoint at step 90 |
 | Constrained and unconstrained evaluation | done (fixture) | author set R@1 0.769 (BM25 0.872); synthetic split R@1 0.783 (BM25 1.000); zero invalid or non-leaf outputs |
 | Valid-leaf retrieval result mapped to the section | done (fixture) | constrained outputs are valid leaves; section mapping through canonical ids |
+| Same chain on a real document (OpenStax, 47 leaves) | done | 265 queries; constrained beam R@1 0.404, R@3 0.787; BM25 R@1 0.936; zero invalid or non-leaf outputs |
 
 Remaining Phase 1 work:
 
-1. Run the same chain on one real, legally usable document with a nested ToC (candidates in `SOURCING_AND_DATA_AUDIT.md`). Phase 1 is not complete until this passes.
+1. Retrieval quality is below BM25 on the real document. Improving training data, training and decoding is the next work before Phase 2 comparisons are meaningful.
 2. Decide whether to commit the working-tree changes listed in `PROJECT_STATUS.md`, section 3.
 
 ## Phase 2: evaluation and baselines: not started (partly implemented)

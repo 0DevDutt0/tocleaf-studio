@@ -122,3 +122,23 @@ Each record states the decision, the evidence behind it, and what would change i
   section text), with no dependency.
 - **Evidence.** The implementation is about 60 lines and easy to check. The paper's BM25 also uses leaves as units.
 - **Changes if.** A standard library implementation is needed for a specific benchmark protocol.
+
+## ADR-013: Local trainer that selects by the paper's rule
+
+- **Decision.** A second training path (`stair_engine/training/local.py`) selects the checkpoint by constrained dev
+  Recall@1, with early stopping on patience in epochs (paper, Section 5.2). The pinned upstream trainer remains the
+  baseline, and it still selects by evaluation loss.
+- **Evidence.** The upstream trainer runs a text-generation callback at every evaluation, which is slow and does not
+  measure retrieval. The paper selects by dev Recall@1. The local loss matches Hugging Face's causal-LM loss on a
+  padded batch, and its constrained scores match a manual per-step renormalisation (`tests/test_local_trainer.py`).
+- **Deviations.** At most 20 epochs with patience 5 (paper: up to 200 epochs with patience 20). The dev split has
+  about 18 queries, so the selection is noisy: one query is about 5 points of Recall@1. The optimiser and learning-rate
+  schedule match the upstream configuration.
+
+## ADR-014: Augmentation adds training queries only
+
+- **Decision.** `augment-dataset` generates additional queries for the same passages and adds them to training. The
+  validation and test files are copied byte for byte. A new query is rejected if it repeats an existing query, or if
+  its content words overlap a validation or test query with a Jaccard score of at least 0.6.
+- **Evidence.** A fixed test set makes runs comparable. The overlap check guards against paraphrases of test
+  questions leaking into training. `tests/test_augmentation.py` checks both properties.

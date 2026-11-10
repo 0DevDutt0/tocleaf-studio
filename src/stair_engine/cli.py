@@ -95,6 +95,37 @@ def _overrides_from_args(args) -> TrainingOverrides:
     )
 
 
+def cmd_augment_dataset(args) -> int:
+    from stair_engine.pipeline import StructureValidationError, augment_dataset
+    from stair_engine.structure.overrides import load_corrections
+    from stair_engine.synthetic.llm import LLMConfigurationError, client_from_environment
+
+    try:
+        extra_body = {"reasoning_effort": args.reasoning_effort} if args.reasoning_effort else None
+        client = client_from_environment(extra_body=extra_body, timeout_seconds=args.timeout)
+    except LLMConfigurationError as error:
+        print(f"tocleaf augment-dataset: {error}", file=sys.stderr)
+        return 1
+    corrections = load_corrections(args.corrections) if args.corrections else None
+    try:
+        manifest = augment_dataset(
+            args.base,
+            args.pdf,
+            args.out,
+            client=client,
+            corrections=corrections,
+            questions_per_passage=args.questions_per_passage,
+            max_passage_words=args.max_passage_words,
+            leakage_threshold=args.leakage_threshold,
+            book_title=args.title,
+        )
+    except (StructureValidationError, ValueError) as error:
+        print(f"tocleaf augment-dataset: {error}", file=sys.stderr)
+        return 2
+    print(json.dumps({"dataset_id": manifest["dataset_id"], "counts": manifest["counts"], "augmentation": {k: manifest["augmentation"][k] for k in ("added_train_queries", "generated_candidates", "rejected")}}, indent=2))
+    return 0
+
+
 def cmd_preflight(args) -> int:
     from transformers import AutoTokenizer
 
@@ -141,6 +172,31 @@ def cmd_train(args) -> int:
     )
     print(json.dumps({k: result[k] for k in ("run_id", "returncode", "duration_seconds", "peak_gpu_memory_mib", "checkpoints", "adapter_saved", "boundary_mismatch_warnings", "success")}, indent=2))
     return 0 if result["success"] else 1
+
+
+def cmd_train_local(args) -> int:
+    from stair_engine.dataset.preflight import DatasetGateError, check_dataset_gates
+    from stair_engine.training.local import LocalTrainingConfig, run_local_training
+
+    try:
+        check_dataset_gates(args.data)
+    except DatasetGateError as error:
+        print(f"tocleaf train-local: {error}", file=sys.stderr)
+        return 2
+    contract = load_upstream_prompt_contract(args.upstream)
+    config = LocalTrainingConfig(
+        model_name=args.model,
+        learning_rate=args.learning_rate,
+        warmup_steps=args.warmup,
+        micro_batch_size=args.batch_size,
+        gradient_accumulation_steps=args.grad_accum,
+        max_epochs=args.epochs,
+        patience_epochs=args.patience,
+        seed=args.seed,
+    )
+    manifest = run_local_training(data_dir=args.data, run_dir=args.run, contract=contract, config=config, device=args.device)
+    print(json.dumps({k: manifest[k] for k in ("best", "duration_seconds", "peak_gpu_memory_mib", "adapter_saved")}, indent=2))
+    return 0 if manifest["adapter_saved"] else 1
 
 
 def cmd_eval_stair(args) -> int:
@@ -217,6 +273,19 @@ def build_parser() -> argparse.ArgumentParser:
         p.add_argument("--patience", type=int, default=5)
         p.add_argument("--eval-interval", type=int, default=30)
 
+    augment = sub.add_parser("augment-dataset", help="Add generated training queries; validation and test stay unchanged")
+    augment.add_argument("--base", required=True, help="existing dataset directory")
+    augment.add_argument("pdf")
+    augment.add_argument("--out", required=True)
+    augment.add_argument("--title", default=None)
+    augment.add_argument("--corrections", default=None)
+    augment.add_argument("--questions-per-passage", type=int, default=8)
+    augment.add_argument("--max-passage-words", type=int, default=1500)
+    augment.add_argument("--leakage-threshold", type=float, default=0.6)
+    augment.add_argument("--timeout", type=float, default=300.0)
+    augment.add_argument("--reasoning-effort", default="none")
+    augment.set_defaults(func=cmd_augment_dataset)
+
     preflight = sub.add_parser("preflight", help="Check every example fits max_seq_length")
     preflight.add_argument("--data", required=True)
     add_training_args(preflight)
@@ -228,6 +297,21 @@ def build_parser() -> argparse.ArgumentParser:
     train.add_argument("--uv", default="uv")
     add_training_args(train)
     train.set_defaults(func=cmd_train)
+
+    local = sub.add_parser("train-local", help="Train with the paper's selection rule: constrained dev Recall@1, patience")
+    local.add_argument("--data", required=True)
+    local.add_argument("--run", required=True, help="fresh run directory")
+    local.add_argument("--upstream", default=str(DEFAULT_UPSTREAM))
+    local.add_argument("--model", default="Qwen/Qwen2.5-0.5B-Instruct")
+    local.add_argument("--epochs", type=int, default=20)
+    local.add_argument("--patience", type=int, default=5, help="epochs without a dev Recall@1 gain before stopping")
+    local.add_argument("--batch-size", type=int, default=4)
+    local.add_argument("--grad-accum", type=int, default=2)
+    local.add_argument("--learning-rate", type=float, default=1e-4)
+    local.add_argument("--warmup", type=int, default=20)
+    local.add_argument("--seed", type=int, default=42)
+    local.add_argument("--device", default="cuda")
+    local.set_defaults(func=cmd_train_local)
 
     eval_stair = sub.add_parser("eval-stair", help="Evaluate a trained adapter with constrained and unconstrained decoding")
     eval_stair.add_argument("--data", required=True)
